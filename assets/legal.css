@@ -1,4 +1,5 @@
 :root{
+  --card:#FBF9F2;--text2:#2B2922;--line2:#b9b4a1;
   --paper:#F2EEE3;--paper2:#E9E4D5;--ink:#14130F;--mute:#5E5B50;--teal:#0B7A68;--teal-d:#075A4C;
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -33,7 +34,7 @@ main{padding:64px 0 84px}
 .eyebrow{color:var(--teal);margin-bottom:16px;display:block}
 h1{font-family:var(--serif);font-weight:800;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.03em;margin-bottom:18px}
 .meta{color:var(--mute);margin-bottom:34px}
-.notice{border:1.5px solid var(--ink);background:#FBF9F2;padding:16px 18px;font-size:15px;margin-bottom:40px;box-shadow:5px 5px 0 var(--teal)}
+.notice{border:1.5px solid var(--ink);background:var(--card);padding:16px 18px;font-size:15px;margin-bottom:40px;box-shadow:5px 5px 0 var(--teal)}
 nav.toc{border-top:1.5px solid var(--ink);padding:22px 0 26px;margin-bottom:6px}
 nav.toc p{margin-bottom:10px;color:var(--mute)}
 nav.toc ol{columns:2;column-gap:36px;padding-left:22px;font-size:15.5px}
@@ -41,12 +42,12 @@ nav.toc li{break-inside:avoid;margin-bottom:4px}
 section.s{padding:30px 0;border-top:1px solid var(--ink)}
 section.s h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.2vw,32px);line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
 section.s h2>span:first-child{font-family:var(--mono);font-size:13px;color:var(--teal);margin-right:10px;font-weight:500;letter-spacing:.06em;vertical-align:middle}
-section.s p{margin-bottom:12px;color:#2B2922}
-section.s ul{margin:6px 0 14px 22px;color:#2B2922}
+section.s p{margin-bottom:12px;color:var(--text2)}
+section.s ul{margin:6px 0 14px 22px;color:var(--text2)}
 section.s li{margin-bottom:6px}
 table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:15px}
 th{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--mute);padding:0 12px 8px 0;border-bottom:1.5px solid var(--ink)}
-td{padding:11px 12px 11px 0;border-bottom:1px solid #b9b4a1;vertical-align:top;color:#2B2922}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--text2)}
 
 footer{background:var(--ink);color:#a8a493;padding:26px 0}
 footer .w{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
@@ -58,7 +59,15 @@ footer a{color:var(--paper)}
   .brand{font-size:21px}.brand img{height:32px}
   main{padding:44px 0 64px}
   table,thead,tbody,tr,td{display:block}thead{display:none}
-  tr{padding:10px 0;border-bottom:1px solid #b9b4a1}td{border:0;padding:2px 0}
+  tr{padding:10px 0;border-bottom:1px solid var(--line2)}td{border:0;padding:2px 0}
 }
 @media print{header,.lang,footer{display:none}body{background:#fff}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* dark theme + toggle */
+html[data-theme="dark"]{--paper:#14130F;--paper2:#1E1D17;--ink:#F2EEE3;--mute:#A8A493;--teal:#14B8A6;--teal-d:#2DD4BF;--card:#1E1D17;--text2:#D8D3C4;--line2:#3A382F}
+html[data-theme="dark"] footer{background:#0C0B09}
+html[data-theme="dark"] ::selection{color:#14130F}
+.theme{display:inline-flex;align-items:center;justify-content:center;width:36px;height:34px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme .i-sun{display:none}html[data-theme="dark"] .theme .i-sun{display:block}html[data-theme="dark"] .theme .i-moon{display:none}

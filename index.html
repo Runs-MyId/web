@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,94 +11,163 @@
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>(function(){try{var d=document.documentElement,t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.dataset.theme=t;var l=localStorage.getItem('lang');if(!l)l=(navigator.language||'id').slice(0,2)==='en'?'en':'id';d.lang=l;d.dataset.lang=l}catch(e){}})();</script>
 <style>
 :root{
+  color-scheme:light;
   --paper:#F2EEE3; --paper2:#E9E4D5; --ink:#14130F; --mute:#5E5B50; --rule:#14130F;
-  --teal:#0B7A68; --teal-d:#075A4C; --red:#C2410C;
+  --card:#FBF9F2; --text2:#2B2922; --line2:#b9b4a1; --dash:#9a9684;
+  --teal:#0B7A68; --teal-d:#075A4C; --teal-b:#14B8A6; --red:#C2410C; --red-t:#7c2d12;
+  --band:#14130F; --band-fg:#F2EEE3; --band-mute:#d1ccbb; --band-line:#3a382f;
+  --shadow:#14130F;
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 }
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#12110E; --paper2:#1B1A16; --ink:#EDE8DA; --mute:#A39F8F; --rule:#6f6a5b;
+  --card:#1C1B17; --text2:#D6D0BF; --line2:#38362D; --dash:#5f5b4d;
+  --teal:#2DD4BF; --teal-d:#5EEAD4; --teal-b:#2DD4BF; --red:#FB923C; --red-t:#FDBA74;
+  --band:#1C1B17; --band-fg:#EDE8DA; --band-mute:#B7B2A1; --band-line:#3a382f;
+  --shadow:#000;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background-color .25s,color .25s}
 a{color:inherit}
 img{display:block;max-width:100%}
 ::selection{background:var(--teal);color:var(--paper)}
 :focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .w{max-width:1180px;margin:0 auto;padding:0 28px}
 .mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
-.rule{border:0;border-top:1.5px solid var(--rule)}
 h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.04;letter-spacing:-.025em}
 h2{font-size:clamp(34px,5vw,58px);max-width:20ch}
 .sec{padding:96px 0;border-top:1.5px solid var(--rule)}
 .label{display:flex;gap:14px;align-items:baseline;margin-bottom:34px;color:var(--mute)}
 .label b{color:var(--teal);font-weight:500}
+.intro{max-width:36em;margin-top:22px;color:var(--text2)}
 
-/* top strip */
-header{border-bottom:1.5px solid var(--rule)}
-.bar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:20px}
+/* ---------- header (sticky) ---------- */
+header{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1.5px solid var(--rule);transition:background-color .25s}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:18px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--serif);font-weight:800;font-size:26px;letter-spacing:-.03em}
-.brand img{height:42px;width:auto}
+.brand img{height:40px;width:auto}
 .brand i{font-style:normal;color:var(--teal)}
-nav{display:flex;gap:26px;align-items:center}
-nav a{text-decoration:none;font-size:15px}
-nav a:hover{color:var(--teal)}
+html[data-theme="dark"] .logo-l,html:not([data-theme="dark"]) .logo-d{display:none}
+nav{display:flex;gap:24px;align-items:center}
+nav>a:not(.btn){text-decoration:none;font-size:15px}
+nav>a:not(.btn):hover{color:var(--teal)}
+.ctl{display:flex;align-items:center;gap:10px}
+.lang{display:flex;border:1.5px solid var(--ink)}
+.lang button{font:500 12px var(--mono);letter-spacing:.06em;padding:7px 10px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.lang button+button{border-left:1.5px solid var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.theme{width:36px;height:34px;display:grid;place-items:center;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.theme:hover,.lang button:hover:not([aria-pressed="true"]){background:var(--paper2)}
+.theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:square}
+html[data-theme="dark"] .theme .i-moon,html:not([data-theme="dark"]) .theme .i-sun{display:none}
+
 .btn{display:inline-block;background:var(--ink);color:var(--paper)!important;padding:12px 22px;font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--ink);cursor:pointer;transition:.15s;box-shadow:4px 4px 0 var(--teal)}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--teal)}
 .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--teal)}
 .btn.alt{background:transparent;color:var(--ink)!important;box-shadow:4px 4px 0 var(--ink)}
+nav .btn{padding:10px 18px}
 
-/* hero */
-.hero{padding:72px 0 88px}
-.hero .w{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:start}
+/* ---------- hero ---------- */
+.hero{padding:72px 0 88px;position:relative;overflow:hidden}
+.hero .w{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:start;position:relative}
 .hero h1{font-size:clamp(46px,7.4vw,98px);font-weight:800}
 .hero h1 em{font-style:italic;font-weight:400;color:var(--teal)}
 .hero h1 s{text-decoration-thickness:.07em;text-decoration-color:var(--red)}
-.hero p.l{font-size:20px;max-width:34em;margin:28px 0 34px;color:#2B2922}
+.hero p.l{font-size:20px;max-width:34em;margin:28px 0 34px;color:var(--text2)}
 .cta{display:flex;gap:18px;flex-wrap:wrap}
 .glyph{position:absolute;right:-40px;bottom:-40px;width:340px;opacity:.06;pointer-events:none}
-.hero{position:relative;overflow:hidden}
-.hero .w{position:relative}
+html[data-theme="dark"] .glyph{filter:invert(1)}
 
 /* calculator "struk" */
-.struk{background:#FBF9F2;border:1.5px solid var(--ink);padding:26px 24px;position:relative;box-shadow:8px 8px 0 var(--ink);font-family:var(--mono)}
-.struk:before,.struk:after{content:"";position:absolute;left:-1.5px;right:-1.5px;height:10px;background:radial-gradient(circle at 8px 0,var(--paper) 5px,transparent 5.5px) 0 0/16px 10px repeat-x}
-.struk:before{top:-10px;transform:scaleY(-1);filter:drop-shadow(0 -1.5px 0 var(--ink))}
-.struk:after{display:none}
+.struk{background:var(--card);border:1.5px solid var(--ink);padding:26px 24px;position:relative;box-shadow:8px 8px 0 var(--shadow);font-family:var(--mono)}
+.struk:before{content:"";position:absolute;left:-1.5px;right:-1.5px;height:10px;top:-10px;background:radial-gradient(circle at 8px 0,var(--paper) 5px,transparent 5.5px) 0 0/16px 10px repeat-x;transform:scaleY(-1);filter:drop-shadow(0 -1.5px 0 var(--ink))}
 .struk h3{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
 .struk .sub{font-size:12px;color:var(--mute);margin-bottom:18px;line-height:1.5;font-family:var(--sans)}
-.fld{display:grid;grid-template-columns:1fr 150px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed #9a9684;font-size:12.5px}
+.fld{display:grid;grid-template-columns:1fr 160px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--dash);font-size:12.5px}
 .fld input{width:100%;font:500 14px var(--mono);text-align:right;padding:6px 8px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
 .hasil{margin-top:18px;border-top:1.5px solid var(--ink);padding-top:14px;display:grid;gap:8px}
 .hasil div{display:flex;justify-content:space-between;gap:10px;font-size:13px}
 .hasil b{font-weight:500}
 .hasil .big{display:block;font-family:var(--serif);font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--teal)}
 .hasil .big.neg{font-size:30px;color:var(--red)}
-#chart{width:100%;height:96px;margin-top:12px;display:block}
+#chart{width:100%;height:96px;margin-top:12px;display:block;overflow:visible}
 .struk small{display:block;margin-top:12px;font:12px/1.5 var(--sans);color:var(--mute)}
 
-/* manifesto */
-.mani{display:grid;gap:0;margin-top:10px}
-.mani article{display:grid;grid-template-columns:90px 1fr 1.1fr;gap:28px;padding:34px 0;border-top:1px solid var(--rule);align-items:start}
-.mani article:last-child{border-bottom:1px solid var(--rule)}
-.mani .n{font-family:var(--mono);color:var(--teal);font-size:14px;padding-top:8px}
-.mani h3{font-size:clamp(26px,3.2vw,38px)}
-.mani p{color:#2B2922}
+/* ---------- section head with figure ---------- */
+.sechead{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;margin-bottom:38px}
+.figbox{width:100%;max-width:380px;justify-self:end}
+.fig{--fi:var(--ink);--fc:var(--card);display:block;width:100%;height:auto;overflow:visible}
+.fig.on-band{--fi:var(--band-fg);--fc:var(--band)}
+.fig .l{fill:none;stroke:var(--fi);stroke-width:2.5;stroke-linejoin:miter;stroke-linecap:square}
+.fig .c{fill:var(--fc);stroke:var(--fi);stroke-width:2.5;stroke-linejoin:miter}
+.fig .t{fill:var(--teal);stroke:var(--fi);stroke-width:2.5}
+.fig .tn{fill:var(--teal)}
+.fig .ts{fill:none;stroke:var(--teal);stroke-width:3;stroke-linecap:square;stroke-linejoin:miter}
+.fig .rs{fill:none;stroke:var(--red);stroke-width:2.5;stroke-linecap:square}
+.fig .rf{fill:var(--fc);stroke:var(--red);stroke-width:2.5}
+.fig .i{fill:var(--fi)}
+.fig .dash{stroke-dasharray:5 6}
+.fig *,.track *{transform-box:fill-box;transform-origin:center}
+.fig:not(.on) *,.track:not(.on) *{animation-play-state:paused!important}
 
-/* ledger */
+@keyframes flip{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.06)}}
+@keyframes grow{0%{transform:scaleY(0)}28%,82%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+@keyframes draw{0%,40%{stroke-dashoffset:34}58%,84%{stroke-dashoffset:0}100%{stroke-dashoffset:34}}
+@keyframes pass{from{transform:translateX(-24px)}to{transform:translateX(24px)}}
+@keyframes ping{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes dashmove{to{stroke-dashoffset:-22}}
+@keyframes drop{0%{transform:translateY(-70px);opacity:0}14%{opacity:1}30%,88%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+@keyframes pop{0%,26%{opacity:0;transform:translateY(12px)}38%,88%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes dotp{0%,100%{transform:scale(.45);opacity:.5}50%{transform:scale(1);opacity:1}}
+@keyframes showa{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}
+@keyframes showb{0%,45%{opacity:0}50%,95%{opacity:1}100%{opacity:0}}
+@keyframes bump{0%,80%,100%{transform:scale(1)}90%{transform:scale(1.05)}}
+.a-flip{animation:flip 2.6s ease-in-out infinite}
+.a-grow{transform-origin:50% 100%;animation:grow 4s ease-out infinite}
+.a-grow.d1{animation-delay:.25s}.a-grow.d2{animation-delay:.5s}
+.a-draw{stroke-dasharray:34;animation:draw 4s ease-in-out infinite}
+.a-pass{animation:pass 2.2s ease-in-out infinite alternate}
+.a-ping{animation:ping 2.2s ease-in-out infinite}
+.a-flow{animation:dashmove 1.2s linear infinite}
+.a-drop{animation:drop 6s ease-out infinite}
+.a-pop{animation:pop 6s ease-out infinite}
+.a-pop.d1{animation-delay:.25s}.a-pop.d2{animation-delay:.5s}.a-pop.d3{animation-delay:.75s}
+.a-bob{animation:bob 2.4s ease-in-out infinite}
+.a-dot{animation:dotp 1.1s ease-in-out infinite}.a-dot.d1{animation-delay:.18s}.a-dot.d2{animation-delay:.36s}
+.a-showa{animation:showa 6s ease-in-out infinite}.a-showb{animation:showb 6s ease-in-out infinite}
+.a-bump{animation:bump 3.4s ease-in-out infinite}
+
+/* ---------- manifesto ---------- */
+.mani{display:grid;gap:0;margin-top:10px}
+.mani article{display:grid;grid-template-columns:120px 1fr 1.1fr;gap:28px;padding:30px 0;border-top:1px solid var(--rule);align-items:center}
+.mani article:last-child{border-bottom:1px solid var(--rule)}
+.mi{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.mi .fig{width:88px}
+.mani .n{font-family:var(--mono);color:var(--teal);font-size:14px}
+.mani h3{font-size:clamp(26px,3.2vw,38px)}
+.mani p{color:var(--text2)}
+
+/* ---------- ledger ---------- */
 table{width:100%;border-collapse:collapse;margin-top:6px}
-th{font:500 12px var(--mono);letter-spacing:.07em;text-transform:uppercase;text-align:left;color:var(--mute);padding:0 16px 12px 0;border-bottom:1.5px solid var(--ink)}
-td{padding:26px 16px 26px 0;border-bottom:1px solid #b9b4a1;vertical-align:top}
+th{font:500 12px var(--mono);letter-spacing:.07em;text-transform:uppercase;text-align:left;color:var(--mute);padding:0 16px 12px 0;border-bottom:1.5px solid var(--rule)}
+td{padding:26px 16px 26px 0;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--text2)}
 tr:hover td{background:var(--paper2)}
 td:first-child{font-family:var(--mono);color:var(--teal);width:56px}
-td strong{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.1;display:block}
+td strong{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.1;display:block;color:var(--ink)}
 td.k{width:30%;color:var(--mute);font-size:15px}
 
-/* ambil / tolak */
-.twin{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink)}
+/* ---------- ambil / tolak ---------- */
+.twin{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--rule)}
 .twin>div{padding:36px}
-.twin>div+div{border-left:1.5px solid var(--ink);background:var(--ink);color:var(--paper)}
+.twin>div+div{border-left:1.5px solid var(--rule);background:var(--band);color:var(--band-fg)}
 .twin h3{font-size:34px;margin-bottom:20px}
 .twin ul{list-style:none;display:grid;gap:14px}
 .twin li{padding-left:30px;position:relative}
@@ -106,79 +175,117 @@ td.k{width:30%;color:var(--mute);font-size:15px}
 .twin>div:first-child li:before{content:"+";color:var(--teal)}
 .twin>div+div li:before{content:"×";color:#fb923c}
 
-/* alur */
-.alur{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid var(--ink)}
-.alur>div{padding:22px 18px 26px;border-right:1px solid var(--ink);position:relative}
+/* ---------- alur ---------- */
+.track{position:relative;height:64px;margin:6px 0 10px}
+.track .ln{position:absolute;left:10%;right:10%;top:50%;border-top:2px dashed var(--dash)}
+.track .nd{position:absolute;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border:2.5px solid var(--ink);background:var(--paper);transform:rotate(45deg)}
+.track .run{position:absolute;top:50%;left:10%;width:26px;height:26px;margin:-13px 0 0 -13px;background:var(--teal);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--shadow)}
+@keyframes runx{0%,6%{left:10%;opacity:1}20%,26%{left:30%}40%,46%{left:50%}60%,66%{left:70%}80%,90%{left:90%;opacity:1}95%{left:90%;opacity:0}96%{left:10%;opacity:0}100%{left:10%;opacity:1}}
+@keyframes lit1{0%,92%{background:var(--teal)}95%,100%{background:var(--paper)}}
+@keyframes lit2{0%,19.9%{background:var(--paper)}20%,92%{background:var(--teal)}95%,100%{background:var(--paper)}}
+@keyframes lit3{0%,39.9%{background:var(--paper)}40%,92%{background:var(--teal)}95%,100%{background:var(--paper)}}
+@keyframes lit4{0%,59.9%{background:var(--paper)}60%,92%{background:var(--teal)}95%,100%{background:var(--paper)}}
+@keyframes lit5{0%,79.9%{background:var(--paper)}80%,92%{background:var(--teal)}95%,100%{background:var(--paper)}}
+.track .nd:nth-of-type(1){animation:lit1 10s linear infinite}
+.track .nd:nth-of-type(2){animation:lit2 10s linear infinite}
+.track .nd:nth-of-type(3){animation:lit3 10s linear infinite}
+.track .nd:nth-of-type(4){animation:lit4 10s linear infinite}
+.track .nd:nth-of-type(5){animation:lit5 10s linear infinite}
+.track .run{animation:runx 10s ease-in-out infinite}
+.alur{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid var(--rule)}
+.alur>div{padding:22px 18px 26px;border-right:1px solid var(--rule);position:relative}
 .alur>div:last-child{border-right:0}
-.alur .t{font:500 12px var(--mono);color:var(--teal);letter-spacing:.08em}
+.alur .t{font:500 12px var(--mono);color:var(--teal);letter-spacing:.08em;text-transform:uppercase}
 .alur h3{font-size:24px;margin:10px 0 8px}
-.alur p{font-size:14.5px;color:#2B2922}
-.alur .out{display:block;margin-top:14px;padding-top:10px;border-top:1px dashed #8d8978;font:12px var(--mono);color:var(--mute)}
+.alur p{font-size:14.5px;color:var(--text2)}
+.alur .out{display:block;margin-top:14px;padding-top:10px;border-top:1px dashed var(--dash);font:12px var(--mono);color:var(--mute)}
 
-/* two-col text */
+/* ---------- about ---------- */
 .cols{display:grid;grid-template-columns:1fr 1.3fr;gap:64px}
-.cols p{margin-bottom:16px;color:#2B2922}
-.stack{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);line-height:1.45;letter-spacing:-.01em}
+.cols p{margin-bottom:16px;color:var(--text2)}
+.cols .figbox{margin-top:30px;justify-self:start}
+.stack{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);line-height:1.45;letter-spacing:-.01em;color:var(--ink)}
 .stack span{border-bottom:2px solid var(--teal)}
 
-/* faq as dl */
+/* ---------- faq ---------- */
 dl{display:grid;grid-template-columns:1fr 1.4fr;gap:0 64px}
-dt{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.2;padding:26px 0;border-top:1px solid var(--ink)}
-dd{padding:26px 0;border-top:1px solid var(--ink);color:#2B2922}
-dl>:nth-last-child(-n+2){border-bottom:1px solid var(--ink)}
+dt{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.2;padding:26px 0;border-top:1px solid var(--rule)}
+dd{padding:26px 0;border-top:1px solid var(--rule);color:var(--text2)}
+dl>:nth-last-child(-n+2){border-bottom:1px solid var(--rule)}
 
-/* contact */
-.contact{background:var(--ink);color:var(--paper);border-top:0}
+/* ---------- contact ---------- */
+.contact{background:var(--band);color:var(--band-fg);border-top:0}
+html[data-theme="dark"] .contact{border-top:1.5px solid var(--rule)}
 .contact h2{max-width:12ch}
-.contact .label{color:#a8a493}
-.mail{display:inline-block;font-family:var(--serif);font-size:clamp(26px,4.4vw,52px);font-weight:600;letter-spacing:-.025em;text-decoration:none;border-bottom:3px solid var(--teal);margin:26px 0 18px}
+.contact .label{color:var(--band-mute)}
+.mail{display:inline-block;font-family:var(--serif);font-size:clamp(26px,4.4vw,52px);font-weight:600;letter-spacing:-.025em;text-decoration:none;border-bottom:3px solid var(--teal-b);margin:26px 0 18px}
 .contact .g{display:grid;grid-template-columns:1fr 1.15fr;gap:64px}
-.contact p{color:#d1ccbb;max-width:30em}
-form{background:var(--paper);color:var(--ink);padding:30px;display:grid;gap:18px;box-shadow:8px 8px 0 var(--teal)}
+.contact p{color:var(--band-mute);max-width:30em}
+.contact .figbox{margin-top:34px;justify-self:start}
+form{background:var(--paper);color:var(--ink);padding:30px;display:grid;gap:18px;box-shadow:8px 8px 0 var(--teal-b);align-self:start}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 label.f{display:grid;gap:6px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
-form input,form select,form textarea{width:100%;font:16px var(--sans);padding:11px 12px;border:1.5px solid var(--ink);background:#FBF9F2;color:var(--ink);border-radius:0;text-transform:none;letter-spacing:0}
+form input,form select,form textarea{width:100%;font:16px var(--sans);padding:11px 12px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:0;text-transform:none;letter-spacing:0}
 form textarea{min-height:130px;resize:vertical}
 #msg{font-size:14.5px;line-height:1.5}
-#msg:not(:empty){padding:12px 14px;border:1.5px solid var(--ink);background:#FBF9F2}
-#msg.ok{border-color:var(--teal-d);color:var(--teal-d)}#msg.err{border-color:var(--red);color:#7c2d12}
+#msg:not(:empty){padding:12px 14px;border:1.5px solid var(--ink);background:var(--card)}
+#msg.ok{border-color:var(--teal-d);color:var(--teal-d)}#msg.err{border-color:var(--red);color:var(--red-t)}
 #msg .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 #msg .acts a,#msg .acts button{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:8px 12px;border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer}
 #msg .acts button{background:transparent;color:var(--ink)}
-.contact form .fine{font-size:12.5px;color:var(--mute)}
+.contact form .fine{font-size:12.5px;color:var(--mute);max-width:none}
 .contact form .fine a{color:var(--teal-d)}
-footer{background:var(--ink);color:#a8a493;padding:0 0 34px}
-footer .w{border-top:1px solid #3a382f;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer a{color:var(--paper)}
-footer a:hover{color:#14B8A6}
+footer{background:var(--band);color:var(--band-mute);padding:0 0 34px}
+footer .w{border-top:1px solid var(--band-line);padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--band-fg)}
+footer a:hover{color:var(--teal-b)}
 
 @media(max-width:920px){
-  .hero .w,.cols,.contact .g,dl{grid-template-columns:1fr}
-  .mani article{grid-template-columns:50px 1fr}.mani article p{grid-column:2}
+  .hero .w,.cols,.contact .g,dl,.sechead{grid-template-columns:1fr}
+  .sechead{gap:26px}.figbox{justify-self:start;max-width:320px}
+  .mani article{grid-template-columns:96px 1fr;align-items:start}.mani article p{grid-column:2}
   .twin,.alur{grid-template-columns:1fr}
-  .twin>div+div{border-left:0;border-top:1.5px solid var(--ink)}
-  .alur>div{border-right:0;border-bottom:1px solid var(--ink)}.alur>div:last-child{border-bottom:0}
-  nav a:not(.btn){display:none}
+  .twin>div+div{border-left:0;border-top:1.5px solid var(--rule)}
+  .alur>div{border-right:0;border-bottom:1px solid var(--rule)}.alur>div:last-child{border-bottom:0}
+  .track{display:none}
+  nav>a:not(.btn){display:none}
   .sec{padding:70px 0}
-  dl>:nth-last-child(-n+2){border-bottom:0}dd:last-child{border-bottom:1px solid var(--ink)}
+  dl>:nth-last-child(-n+2){border-bottom:0}dd:last-child{border-bottom:1px solid var(--rule)}
   dt{padding-bottom:6px;border-bottom:0}dd{border-top:0;padding-top:0}
   table,thead,tbody,tr,td{display:block}thead{display:none}
-  tr{border-bottom:1px solid #b9b4a1;padding:22px 0}td{border:0;padding:3px 0;width:auto!important}
+  tr{border-bottom:1px solid var(--line2);padding:22px 0}td{border:0;padding:3px 0;width:auto!important}
   tr:hover td{background:none}
   .glyph{width:240px;right:-70px}
 }
-@media(max-width:560px){.bar{padding:12px 0}.brand{font-size:22px;gap:9px}.brand img{height:36px;width:auto}nav .btn{padding:10px 14px;font-size:12px;box-shadow:3px 3px 0 var(--teal)}.hero{padding:44px 0 64px}.two{grid-template-columns:1fr}.fld{grid-template-columns:1fr}.w{padding:0 20px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:560px){
+  .bar{padding:10px 0}.brand{font-size:22px;gap:9px}.brand img{height:34px}
+  nav .btn{display:none}
+  .hero{padding:44px 0 64px}.two{grid-template-columns:1fr}.fld{grid-template-columns:1fr}.w{padding:0 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+  .fig *,.track *{animation:none!important}
+}
+
 </style>
 </head>
 <body>
-
 <header>
   <div class="w bar">
-    <a class="brand" href="#atas"><img src="assets/logo/logo-transparent.svg" alt=""><span>Runs<i>MyId</i></span></a>
+    <a class="brand" href="#atas"><img class="logo-l" src="assets/logo/logo-transparent.svg" alt=""><img class="logo-d" src="assets/logo/logo-on-dark.svg" alt=""><span>Runs<i>MyId</i></span></a>
     <nav>
-      <a href="#prinsip">Prinsip</a><a href="#layanan">Layanan</a><a href="#alur">Alur</a><a href="#tanya">Tanya jawab</a>
-      <a class="btn" href="#kontak">Ajak bicara</a>
+      <a href="#prinsip" data-i="nav.principles">Prinsip</a><a href="#layanan" data-i="nav.services">Layanan</a><a href="#alur" data-i="nav.process">Alur</a><a href="#tanya" data-i="nav.faq">Tanya jawab</a>
+      <div class="ctl">
+        <div class="lang" role="group" aria-label="Bahasa / Language" data-ia="aria-label:ui.lang">
+          <button type="button" data-set="id" aria-pressed="true">ID</button>
+          <button type="button" data-set="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" class="theme" id="theme" aria-label="Ganti tema" data-ia="aria-label:ui.theme" title="Ganti tema">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></svg>
+        </button>
+      </div>
+      <a class="btn" href="#kontak" data-i="nav.cta">Ajak bicara</a>
     </nav>
   </div>
 </header>
@@ -188,59 +295,126 @@ footer a:hover{color:#14B8A6}
   <img class="glyph" src="assets/logo/logo-watermark.svg" alt="">
   <div class="w">
     <div>
-      <p class="mono" style="color:var(--teal);margin-bottom:22px">Aplikasi / bisnis / angka</p>
-      <h1>Aplikasi itu <em>investasi</em>, bukan <s>proyek IT</s>.</h1>
-      <p class="l">Kami membangun aplikasi untuk pemilik bisnis yang mau tahu angkanya dulu: berapa biayanya, kapan balik modal, dan dari mana uangnya datang. Kodenya menyusul, dan ditulis rapi supaya tidak jadi beban tiga tahun lagi.</p>
-      <div class="cta"><a class="btn" href="#kontak">Ceritakan idenya</a><a class="btn alt" href="#layanan">Apa yang kami kerjakan</a></div>
+      <p class="mono" style="color:var(--teal);margin-bottom:22px" data-i="hero.eyebrow">Aplikasi / bisnis / angka</p>
+      <h1 data-i="hero.h1">Aplikasi itu <em>investasi</em>, bukan <s>proyek IT</s>.</h1>
+      <p class="l" data-i="hero.lead">Kami membangun aplikasi untuk pemilik bisnis yang mau tahu angkanya dulu: berapa biayanya, kapan balik modal, dan dari mana uangnya datang. Kodenya menyusul, dan ditulis rapi supaya tidak jadi beban tiga tahun lagi.</p>
+      <div class="cta"><a class="btn" href="#kontak" data-i="hero.cta1">Ceritakan idenya</a><a class="btn alt" href="#layanan" data-i="hero.cta2">Apa yang kami kerjakan</a></div>
     </div>
 
-    <aside class="struk" aria-label="Kalkulator titik impas">
-      <h3>Hitung dulu, bangun kemudian</h3>
-      <p class="sub">Isian di bawah hanya contoh. Ganti dengan angka bisnis Anda untuk melihat kapan aplikasi mulai untung.</p>
-      <label class="fld"><span>Biaya membangun (Rp)</span><input id="c-build" inputmode="numeric" value="150000000"></label>
-      <label class="fld"><span>Biaya jalan / bulan (Rp)</span><input id="c-ops" inputmode="numeric" value="5000000"></label>
-      <label class="fld"><span>Pelanggan berbayar</span><input id="c-users" inputmode="numeric" value="200"></label>
-      <label class="fld"><span>Harga / pelanggan / bulan (Rp)</span><input id="c-price" inputmode="numeric" value="99000"></label>
+    <aside class="struk" aria-label="Kalkulator titik impas" data-ia="aria-label:calc.aria">
+      <h3 data-i="calc.title">Hitung dulu, bangun kemudian</h3>
+      <p class="sub" data-i="calc.sub">Isian di bawah hanya contoh. Ganti dengan angka bisnis Anda untuk melihat kapan aplikasi mulai untung.</p>
+      <label class="fld"><span data-i="calc.build">Biaya membangun (Rp)</span><input id="c-build" class="num" inputmode="numeric" autocomplete="off" value="150000000"></label>
+      <label class="fld"><span data-i="calc.ops">Biaya jalan / bulan (Rp)</span><input id="c-ops" class="num" inputmode="numeric" autocomplete="off" value="5000000"></label>
+      <label class="fld"><span data-i="calc.users">Pelanggan berbayar</span><input id="c-users" class="num" inputmode="numeric" autocomplete="off" value="200"></label>
+      <label class="fld"><span data-i="calc.price">Harga / pelanggan / bulan (Rp)</span><input id="c-price" class="num" inputmode="numeric" autocomplete="off" value="99000"></label>
       <div class="hasil">
-        <div><span>Laba bersih / bulan</span><b id="r-margin">–</b></div>
-        <div><span>Pelanggan minimum agar tidak rugi</span><b id="r-be">–</b></div>
-        <div><span>Balik modal</span></div>
+        <div><span data-i="calc.margin">Laba bersih / bulan</span><b id="r-margin">–</b></div>
+        <div><span data-i="calc.be">Pelanggan minimum agar tidak rugi</span><b id="r-be">–</b></div>
+        <div><span data-i="calc.pay">Balik modal</span></div>
         <div class="big" id="r-pay">–</div>
       </div>
       <svg id="chart" viewBox="0 0 300 96" preserveAspectRatio="none" aria-hidden="true"></svg>
-      <small id="r-note">Kas kumulatif 36 bulan. Garis di bawah nol berarti belum balik modal.</small>
+      <small id="r-note" data-i="calc.note">Kas kumulatif 36 bulan. Garis di bawah nol berarti belum balik modal.</small>
     </aside>
   </div>
 </section>
 
 <section class="sec" id="prinsip">
   <div class="w">
-    <div class="label mono"><b>01</b><span>Cara kami berpikir</span></div>
-    <h2>Empat aturan yang kami pegang.</h2>
+    <div class="label mono"><b>01</b><span data-i="p.label">Cara kami berpikir</span></div>
+    <h2 data-i="p.h2">Empat aturan yang kami pegang.</h2>
     <div class="mani">
-      <article><span class="n">A.</span><h3>Tanya uangnya dulu.</h3><p>Sebelum membahas fitur, kami bertanya siapa yang akan membayar, berapa, dan kenapa mau. Aplikasi yang tidak punya jawaban untuk itu belum siap dibangun.</p></article>
-      <article><span class="n">B.</span><h3>Kecil, lalu terbukti.</h3><p>Versi pertama hanya memuat apa yang diperlukan untuk menguji satu hipotesis bisnis. Fitur tambahan menunggu bukti dari pengguna sungguhan.</p></article>
-      <article><span class="n">C.</span><h3>Tulis untuk orang berikutnya.</h3><p>Setiap keputusan teknis dicatat, struktur proyek seragam, dan komponen dipakai ulang. Siapa pun yang meneruskan, termasuk tim Anda sendiri, tidak mulai dari nol.</p></article>
-      <article><span class="n">D.</span><h3>Aman sejak lembar pertama.</h3><p>Identitas pengguna, hak akses, dan data diperlakukan sebagai bagian dari rancangan, bukan tambalan menjelang rilis.</p></article>
+      <article>
+        <div class="mi">
+          <svg class="fig" viewBox="0 0 96 96" aria-hidden="true">
+            <rect class="c" x="22" y="74" width="52" height="11"/><rect class="c" x="26" y="63" width="52" height="11"/><rect class="c" x="20" y="52" width="52" height="11"/>
+            <g class="a-flip"><circle class="t" cx="48" cy="28" r="19"/><circle class="l" cx="48" cy="28" r="11"/><path class="l" d="M48 21v14M42 25h12M42 31h12"/></g>
+          </svg>
+          <span class="n">A.</span>
+        </div>
+        <h3 data-i="p.a.h">Tanya uangnya dulu.</h3>
+        <p data-i="p.a.p">Sebelum membahas fitur, kami bertanya siapa yang akan membayar, berapa, dan kenapa mau. Aplikasi yang tidak punya jawaban untuk itu belum siap dibangun.</p>
+      </article>
+      <article>
+        <div class="mi">
+          <svg class="fig" viewBox="0 0 96 96" aria-hidden="true">
+            <path class="l" d="M8 86H90"/>
+            <rect class="c a-grow" x="14" y="62" width="18" height="24"/><rect class="c a-grow d1" x="40" y="44" width="18" height="42"/><rect class="t a-grow d2" x="66" y="24" width="18" height="62"/>
+            <path class="ts a-draw" d="M62 14l7 7 15-15"/>
+          </svg>
+          <span class="n">B.</span>
+        </div>
+        <h3 data-i="p.b.h">Kecil, lalu terbukti.</h3>
+        <p data-i="p.b.p">Versi pertama hanya memuat apa yang diperlukan untuk menguji satu hipotesis bisnis. Fitur tambahan menunggu bukti dari pengguna sungguhan.</p>
+      </article>
+      <article>
+        <div class="mi">
+          <svg class="fig" viewBox="0 0 96 96" aria-hidden="true">
+            <rect class="c" x="6" y="26" width="30" height="42"/><path class="l" d="M12 36h18M12 44h18M12 52h10"/>
+            <rect class="c" x="60" y="26" width="30" height="42"/><path class="l dash" d="M66 36h18M66 44h18M66 52h10"/>
+            <g class="a-pass"><rect class="t" x="34" y="32" width="28" height="38"/><path class="l" d="M40 42h16M40 50h16M40 58h10"/></g>
+            <path class="l" d="M18 84h56M66 78l8 6-8 6"/>
+          </svg>
+          <span class="n">C.</span>
+        </div>
+        <h3 data-i="p.c.h">Tulis untuk orang berikutnya.</h3>
+        <p data-i="p.c.p">Setiap keputusan teknis dicatat, struktur proyek seragam, dan komponen dipakai ulang. Siapa pun yang meneruskan, termasuk tim Anda sendiri, tidak mulai dari nol.</p>
+      </article>
+      <article>
+        <div class="mi">
+          <svg class="fig" viewBox="0 0 96 96" aria-hidden="true">
+            <path class="c a-ping" d="M48 8 80 20V46C80 66 66 80 48 90 30 80 16 66 16 46V20Z"/>
+            <path class="ts a-draw" d="M33 48l11 11 20-22"/>
+          </svg>
+          <span class="n">D.</span>
+        </div>
+        <h3 data-i="p.d.h">Aman sejak lembar pertama.</h3>
+        <p data-i="p.d.p">Identitas pengguna, hak akses, dan data diperlakukan sebagai bagian dari rancangan, bukan tambalan menjelang rilis.</p>
+      </article>
     </div>
   </div>
 </section>
 
 <section class="sec" id="layanan">
   <div class="w">
-    <div class="label mono"><b>02</b><span>Daftar pekerjaan</span></div>
-    <h2>Yang bisa kami kerjakan.</h2>
-    <p style="max-width:36em;margin:22px 0 40px;color:#2B2922">Anda boleh mengambil satu baris saja, misalnya konsultasi arsitektur tanpa proyek pembangunan, atau seluruhnya dari ide sampai operasional.</p>
+    <div class="sechead">
+      <div>
+        <div class="label mono"><b>02</b><span data-i="s.label">Daftar pekerjaan</span></div>
+        <h2 data-i="s.h2">Yang bisa kami kerjakan.</h2>
+        <p class="intro" data-i="s.intro">Anda boleh mengambil satu baris saja, misalnya konsultasi arsitektur tanpa proyek pembangunan, atau seluruhnya dari ide sampai operasional.</p>
+      </div>
+      <div class="figbox">
+        <svg class="fig" viewBox="0 0 360 240" aria-hidden="true">
+          <!-- browser -->
+          <rect class="c" x="14" y="16" width="156" height="112"/><path class="l" d="M14 38H170"/>
+          <circle class="i" cx="27" cy="27" r="3"/><circle class="i" cx="39" cy="27" r="3"/><circle class="i" cx="51" cy="27" r="3"/>
+          <path class="l" d="M28 54h50M28 68h96M28 82h80"/><rect class="t" x="100" y="50" width="56" height="44"/><path class="l" d="M28 100h128M28 112h70"/>
+          <!-- phone -->
+          <rect class="c" x="248" y="22" width="78" height="128"/><path class="l" d="M276 32h22"/><rect class="t" x="258" y="46" width="58" height="40"/><path class="l" d="M258 98h58M258 110h40"/><circle class="l" cx="287" cy="136" r="5"/>
+          <!-- database -->
+          <path class="c" d="M146 182v36c0 8 16 14 36 14s36-6 36-14v-36"/><ellipse class="c" cx="182" cy="182" rx="36" ry="12"/><path class="l" d="M146 200c0 8 16 14 36 14s36-6 36-14"/>
+          <!-- links -->
+          <path class="l dash a-flow" d="M92 128V156H182V170"/>
+          <path class="l dash a-flow" d="M170 72H208V86H248"/>
+          <path class="l dash a-flow" d="M218 206H287V150"/>
+          <!-- packets -->
+          <rect class="tn" x="-5" y="-5" width="10" height="10"><animateMotion dur="2.6s" repeatCount="indefinite" path="M92 128V156H182V170"/></rect>
+          <rect class="tn" x="-5" y="-5" width="10" height="10"><animateMotion dur="2.2s" begin="0.6s" repeatCount="indefinite" path="M170 72H208V86H248"/></rect>
+          <rect class="tn" x="-5" y="-5" width="10" height="10"><animateMotion dur="2.8s" begin="1.1s" repeatCount="indefinite" path="M218 206H287V150"/></rect>
+        </svg>
+      </div>
+    </div>
     <table>
-      <thead><tr><th>No.</th><th>Layanan</th><th>Hasil yang Anda pegang</th><th>Cocok untuk</th></tr></thead>
+      <thead><tr><th data-i="s.th1">No.</th><th data-i="s.th2">Layanan</th><th data-i="s.th3">Hasil yang Anda pegang</th><th data-i="s.th4">Cocok untuk</th></tr></thead>
       <tbody>
-        <tr><td>01</td><td><strong>Penajaman model bisnis aplikasi</strong></td><td>Dokumen kebutuhan produk, prioritas fitur, dan hitungan titik impas.</td><td class="k">Ide yang belum jelas uangnya.</td></tr>
-        <tr><td>02</td><td><strong>Aplikasi web &amp; API</strong></td><td>Sistem yang berjalan di server Anda, lengkap dengan dokumentasi dan pengujian.</td><td class="k">Layanan internal maupun produk untuk pelanggan.</td></tr>
-        <tr><td>03</td><td><strong>Aplikasi Android &amp; iOS</strong></td><td>Aplikasi siap rilis ke toko, termasuk ikon, aset toko, dan alur pembaruan.</td><td class="k">Bisnis yang pelanggannya ada di ponsel.</td></tr>
-        <tr><td>04</td><td><strong>Produk langganan (SaaS)</strong></td><td>Akun, paket harga, penagihan berulang, dan panel kendali untuk Anda sebagai pemilik.</td><td class="k">Produk yang ditagih per bulan atau tahun.</td></tr>
-        <tr><td>05</td><td><strong>Arsitektur &amp; standar tim</strong></td><td>Rancangan sistem, catatan keputusan, struktur proyek, dan aturan penulisan kode.</td><td class="k">Tim yang sistemnya mulai sulit diubah.</td></tr>
-        <tr><td>06</td><td><strong>Integrasi &amp; otomasi</strong></td><td>Sambungan ke pembayaran, ERP, CRM, atau layanan lain agar kerja manual berkurang.</td><td class="k">Proses yang masih lewat salin-tempel.</td></tr>
-        <tr><td>07</td><td><strong>Operasional &amp; perawatan</strong></td><td>Rilis terjadwal, pemantauan, cadangan data, dan perbaikan setelah aplikasi hidup.</td><td class="k">Aplikasi yang harus tetap menyala.</td></tr>
+        <tr><td>01</td><td><strong data-i="s.r1.a">Penajaman model bisnis aplikasi</strong></td><td data-i="s.r1.b">Dokumen kebutuhan produk, prioritas fitur, dan hitungan titik impas.</td><td class="k" data-i="s.r1.c">Ide yang belum jelas uangnya.</td></tr>
+        <tr><td>02</td><td><strong data-i="s.r2.a">Aplikasi web &amp; API</strong></td><td data-i="s.r2.b">Sistem yang berjalan di server Anda, lengkap dengan dokumentasi dan pengujian.</td><td class="k" data-i="s.r2.c">Layanan internal maupun produk untuk pelanggan.</td></tr>
+        <tr><td>03</td><td><strong data-i="s.r3.a">Aplikasi Android &amp; iOS</strong></td><td data-i="s.r3.b">Aplikasi siap rilis ke toko, termasuk ikon, aset toko, dan alur pembaruan.</td><td class="k" data-i="s.r3.c">Bisnis yang pelanggannya ada di ponsel.</td></tr>
+        <tr><td>04</td><td><strong data-i="s.r4.a">Produk langganan (SaaS)</strong></td><td data-i="s.r4.b">Akun, paket harga, penagihan berulang, dan panel kendali untuk Anda sebagai pemilik.</td><td class="k" data-i="s.r4.c">Produk yang ditagih per bulan atau tahun.</td></tr>
+        <tr><td>05</td><td><strong data-i="s.r5.a">Arsitektur &amp; standar tim</strong></td><td data-i="s.r5.b">Rancangan sistem, catatan keputusan, struktur proyek, dan aturan penulisan kode.</td><td class="k" data-i="s.r5.c">Tim yang sistemnya mulai sulit diubah.</td></tr>
+        <tr><td>06</td><td><strong data-i="s.r6.a">Integrasi &amp; otomasi</strong></td><td data-i="s.r6.b">Sambungan ke pembayaran, ERP, CRM, atau layanan lain agar kerja manual berkurang.</td><td class="k" data-i="s.r6.c">Proses yang masih lewat salin-tempel.</td></tr>
+        <tr><td>07</td><td><strong data-i="s.r7.a">Operasional &amp; perawatan</strong></td><td data-i="s.r7.b">Rilis terjadwal, pemantauan, cadangan data, dan perbaikan setelah aplikasi hidup.</td><td class="k" data-i="s.r7.c">Aplikasi yang harus tetap menyala.</td></tr>
       </tbody>
     </table>
   </div>
@@ -248,20 +422,41 @@ footer a:hover{color:#14B8A6}
 
 <section class="sec">
   <div class="w">
-    <div class="label mono"><b>03</b><span>Seleksi proyek</span></div>
-    <h2>Kami jujur soal yang cocok dan tidak.</h2>
-    <div class="twin" style="margin-top:44px">
-      <div><h3>Kami ambil</h3><ul>
-        <li>Pemilik bisnis yang bisa menjelaskan siapa pelanggannya dan kenapa mau membayar.</li>
-        <li>Produk yang akan hidup bertahun-tahun dan perlu dirawat dengan benar.</li>
-        <li>Tim yang ingin sistemnya didokumentasikan supaya bisa diteruskan sendiri.</li>
-        <li>Pekerjaan sebagian, seperti review arsitektur atau penyusunan standar.</li>
+    <div class="sechead">
+      <div>
+        <div class="label mono"><b>03</b><span data-i="f.label">Seleksi proyek</span></div>
+        <h2 data-i="f.h2">Kami jujur soal yang cocok dan tidak.</h2>
+      </div>
+      <div class="figbox">
+        <svg class="fig" viewBox="0 0 360 240" aria-hidden="true">
+          <!-- gate -->
+          <rect class="i" x="30" y="112" width="124" height="9"/><rect class="i" x="206" y="112" width="124" height="9"/>
+          <path class="l dash" d="M154 116.5H206"/>
+          <!-- app tile -->
+          <rect class="c" x="150" y="190" width="60" height="42"/><rect class="t" x="160" y="199" width="40" height="24"/>
+          <!-- accepted (teal) -->
+          <rect class="t" x="-9" y="-9" width="18" height="18"><animateMotion dur="2.8s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" path="M180 10V196"/><animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.85;1"/></rect>
+          <rect class="t" x="-9" y="-9" width="18" height="18"><animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" path="M180 10V196"/><animate attributeName="opacity" dur="2.8s" begin="1.4s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.85;1"/></rect>
+          <!-- rejected (red) -->
+          <g><rect class="rf" x="-9" y="-9" width="18" height="18"/><path class="rs" d="M-4 -4L4 4M4 -4L-4 4"/>
+            <animateMotion dur="2.8s" begin="0.7s" repeatCount="indefinite" path="M90 10V98Q92 80 46 70"/><animate attributeName="opacity" dur="2.8s" begin="0.7s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.7;1"/></g>
+          <g><rect class="rf" x="-9" y="-9" width="18" height="18"/><path class="rs" d="M-4 -4L4 4M4 -4L-4 4"/>
+            <animateMotion dur="2.8s" begin="2.1s" repeatCount="indefinite" path="M270 10V98Q268 80 314 70"/><animate attributeName="opacity" dur="2.8s" begin="2.1s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.7;1"/></g>
+        </svg>
+      </div>
+    </div>
+    <div class="twin">
+      <div><h3 data-i="f.yes">Kami ambil</h3><ul>
+        <li data-i="f.y1">Pemilik bisnis yang bisa menjelaskan siapa pelanggannya dan kenapa mau membayar.</li>
+        <li data-i="f.y2">Produk yang akan hidup bertahun-tahun dan perlu dirawat dengan benar.</li>
+        <li data-i="f.y3">Tim yang ingin sistemnya didokumentasikan supaya bisa diteruskan sendiri.</li>
+        <li data-i="f.y4">Pekerjaan sebagian, seperti review arsitektur atau penyusunan standar.</li>
       </ul></div>
-      <div><h3>Kami tolak</h3><ul>
-        <li>Proyek yang tenggatnya ditentukan dulu, ruang lingkupnya belakangan.</li>
-        <li>Fitur yang diminta hanya karena kompetitor punya.</li>
-        <li>Aplikasi tanpa rencana pendapatan atau tujuan yang bisa diukur.</li>
-        <li>Pekerjaan yang meminta jalan pintas pada keamanan data pengguna.</li>
+      <div><h3 data-i="f.no">Kami tolak</h3><ul>
+        <li data-i="f.n1">Proyek yang tenggatnya ditentukan dulu, ruang lingkupnya belakangan.</li>
+        <li data-i="f.n2">Fitur yang diminta hanya karena kompetitor punya.</li>
+        <li data-i="f.n3">Aplikasi tanpa rencana pendapatan atau tujuan yang bisa diukur.</li>
+        <li data-i="f.n4">Pekerjaan yang meminta jalan pintas pada keamanan data pengguna.</li>
       </ul></div>
     </div>
   </div>
@@ -269,14 +464,19 @@ footer a:hover{color:#14B8A6}
 
 <section class="sec" id="alur">
   <div class="w">
-    <div class="label mono"><b>04</b><span>Urutan kerja</span></div>
-    <h2>Lima tahap, masing-masing ada serah terimanya.</h2>
-    <div class="alur" style="margin-top:44px">
-      <div><span class="t">TAHAP 1</span><h3>Hitung</h3><p>Menguji model bisnis, pengguna, dan titik impas bersama Anda.</p><span class="out">→ Dokumen kebutuhan + hitungan</span></div>
-      <div><span class="t">TAHAP 2</span><h3>Rancang</h3><p>Menentukan arsitektur, alur layar, dan batas versi pertama.</p><span class="out">→ Desain + catatan keputusan</span></div>
-      <div><span class="t">TAHAP 3</span><h3>Bangun</h3><p>Pengembangan bertahap dengan peninjauan kode dan pengujian otomatis.</p><span class="out">→ Demo di tiap iterasi</span></div>
-      <div><span class="t">TAHAP 4</span><h3>Uji &amp; rilis</h3><p>Uji penerimaan bersama Anda, lalu rilis ke server atau toko aplikasi.</p><span class="out">→ Aplikasi hidup + panduan</span></div>
-      <div><span class="t">TAHAP 5</span><h3>Rawat</h3><p>Memantau pemakaian nyata dan memperbaiki berdasarkan data, bukan tebakan.</p><span class="out">→ Laporan berkala</span></div>
+    <div class="label mono"><b>04</b><span data-i="a.label">Urutan kerja</span></div>
+    <h2 data-i="a.h2">Lima tahap, masing-masing ada serah terimanya.</h2>
+    <div class="track" style="margin-top:40px" aria-hidden="true">
+      <span class="ln"></span>
+      <i class="nd" style="left:10%"></i><i class="nd" style="left:30%"></i><i class="nd" style="left:50%"></i><i class="nd" style="left:70%"></i><i class="nd" style="left:90%"></i>
+      <b class="run"></b>
+    </div>
+    <div class="alur">
+      <div><span class="t" data-i="a.t1">TAHAP 1</span><h3 data-i="a.1h">Hitung</h3><p data-i="a.1p">Menguji model bisnis, pengguna, dan titik impas bersama Anda.</p><span class="out" data-i="a.1o">→ Dokumen kebutuhan + hitungan</span></div>
+      <div><span class="t" data-i="a.t2">TAHAP 2</span><h3 data-i="a.2h">Rancang</h3><p data-i="a.2p">Menentukan arsitektur, alur layar, dan batas versi pertama.</p><span class="out" data-i="a.2o">→ Desain + catatan keputusan</span></div>
+      <div><span class="t" data-i="a.t3">TAHAP 3</span><h3 data-i="a.3h">Bangun</h3><p data-i="a.3p">Pengembangan bertahap dengan peninjauan kode dan pengujian otomatis.</p><span class="out" data-i="a.3o">→ Demo di tiap iterasi</span></div>
+      <div><span class="t" data-i="a.t4">TAHAP 4</span><h3 data-i="a.4h">Uji &amp; rilis</h3><p data-i="a.4p">Uji penerimaan bersama Anda, lalu rilis ke server atau toko aplikasi.</p><span class="out" data-i="a.4o">→ Aplikasi hidup + panduan</span></div>
+      <div><span class="t" data-i="a.t5">TAHAP 5</span><h3 data-i="a.5h">Rawat</h3><p data-i="a.5p">Memantau pemakaian nyata dan memperbaiki berdasarkan data, bukan tebakan.</p><span class="out" data-i="a.5o">→ Laporan berkala</span></div>
     </div>
   </div>
 </section>
@@ -284,29 +484,61 @@ footer a:hover{color:#14B8A6}
 <section class="sec">
   <div class="w cols">
     <div>
-      <div class="label mono"><b>05</b><span>Tentang kami</span></div>
-      <h2>Studio kecil, standar besar.</h2>
+      <div class="label mono"><b>05</b><span data-i="u.label">Tentang kami</span></div>
+      <h2 data-i="u.h2">Studio kecil, standar besar.</h2>
+      <div class="figbox">
+        <svg class="fig" viewBox="0 0 360 240" aria-hidden="true">
+          <path class="l" d="M10 222H350"/>
+          <!-- library tower -->
+          <rect class="c" x="14" y="190" width="170" height="30"/>
+          <rect class="c" x="26" y="156" width="146" height="30"/>
+          <rect class="c" x="40" y="122" width="118" height="30"/>
+          <rect class="t a-drop" x="54" y="88" width="90" height="30"/>
+          <!-- reuse arrow -->
+          <path class="l dash a-flow" d="M192 150H222"/><path class="l" d="M216 143l8 7-8 7"/>
+          <!-- copy tower -->
+          <rect class="c a-pop" x="236" y="190" width="110" height="30"/>
+          <rect class="c a-pop d1" x="246" y="156" width="90" height="30"/>
+          <rect class="c a-pop d2" x="258" y="122" width="66" height="30"/>
+          <rect class="t a-pop d3" x="268" y="88" width="46" height="30"/>
+        </svg>
+      </div>
     </div>
     <div>
-      <p style="font-size:19px">Runs MyId adalah studio pengembangan aplikasi di Indonesia yang bekerja dari sisi arsitektur dan standar, bukan sekadar menambah fitur. Kami membangun kerangka kerja, templat proyek, dan komponen yang bisa dipakai ulang, sehingga tiap proyek baru berjalan lebih cepat dan lebih murah dari proyek sebelumnya.</p>
-      <p>Nama kami sengaja dibaca dua cara: <em>runs my ID</em> (menjalankan identitas dan akun pengguna Anda dengan aman) dan <em>runs my idea</em> (menjalankan ide Anda sampai hidup).</p>
-      <p style="margin-top:28px" class="mono">Alat yang kami pakai</p>
-      <p class="stack" style="margin-top:10px"><span>Python</span> dan <span>Django</span> untuk sistem, <span>PostgreSQL</span> untuk data, <span>Celery</span> untuk pekerjaan latar, <span>HTMX</span> dan JavaScript untuk antarmuka, <span>Docker</span> untuk pengiriman, dan Android serta iOS untuk aplikasi seluler.</p>
+      <p style="font-size:19px" data-i="u.p1">Runs MyId adalah studio pengembangan aplikasi di Indonesia yang bekerja dari sisi arsitektur dan standar, bukan sekadar menambah fitur. Kami membangun kerangka kerja, templat proyek, dan komponen yang bisa dipakai ulang, sehingga tiap proyek baru berjalan lebih cepat dan lebih murah dari proyek sebelumnya.</p>
+      <p data-i="u.p2">Nama kami sengaja dibaca dua cara: <em>runs my ID</em> (menjalankan identitas dan akun pengguna Anda dengan aman) dan <em>runs my idea</em> (menjalankan ide Anda sampai hidup).</p>
+      <p style="margin-top:28px" class="mono" data-i="u.tools">Alat yang kami pakai</p>
+      <p class="stack" style="margin-top:10px" data-i="u.stack"><span>Python</span> dan <span>Django</span> untuk sistem, <span>PostgreSQL</span> untuk data, <span>Celery</span> untuk pekerjaan latar, <span>HTMX</span> dan JavaScript untuk antarmuka, <span>Docker</span> untuk pengiriman, dan Android serta iOS untuk aplikasi seluler.</p>
     </div>
   </div>
 </section>
 
 <section class="sec" id="tanya">
   <div class="w">
-    <div class="label mono"><b>06</b><span>Tanya jawab</span></div>
-    <h2>Yang biasanya ditanyakan lebih dulu.</h2>
-    <dl style="margin-top:44px">
-      <dt>Berapa biayanya?</dt><dd>Tergantung ruang lingkup. Kami tidak memasang harga di halaman ini karena angka tanpa konteks menyesatkan. Setelah sesi pertama, Anda mendapat perkiraan biaya dan tahapan tertulis.</dd>
-      <dt>Berapa lama pengerjaannya?</dt><dd>Versi pertama dirancang sekecil mungkin supaya cepat diuji. Estimasi waktu diberikan setelah kebutuhan dipetakan, bukan sebelumnya.</dd>
-      <dt>Siapa pemilik kode dan datanya?</dt><dd>Hal ini disepakati tertulis sejak awal. Pendekatan kami memastikan Anda mendapat dokumentasi yang cukup untuk berpindah tim kapan pun.</dd>
-      <dt>Setelah rilis, apa yang terjadi?</dt><dd>Aplikasi bisa kami rawat atau diserahkan ke tim Anda. Dua-duanya didukung oleh dokumentasi dan catatan keputusan yang sama.</dd>
-      <dt>Bisa bayar untuk konsultasi saja?</dt><dd>Bisa. Review arsitektur, penyusunan standar kode, dan penajaman model bisnis dapat diambil tanpa proyek pembangunan.</dd>
-      <dt>Bagaimana mulainya?</dt><dd>Kirim ringkasan singkat lewat formulir di bawah. Kami membalas lewat email untuk menjadwalkan percakapan awal.</dd>
+    <div class="sechead">
+      <div>
+        <div class="label mono"><b>06</b><span data-i="q.label">Tanya jawab</span></div>
+        <h2 data-i="q.h2">Yang biasanya ditanyakan lebih dulu.</h2>
+      </div>
+      <div class="figbox">
+        <svg class="fig" viewBox="0 0 360 230" aria-hidden="true">
+          <!-- question bubble -->
+          <path class="c" d="M18 18H178V104H70L44 132V104H18Z"/>
+          <g class="a-bob"><path class="l" d="M84 52c0-13 10-20 22-20s22 7 22 19c0 9-6 13-12 17-6 4-10 7-10 15"/><circle class="i" cx="106" cy="92" r="3.5"/></g>
+          <!-- answer bubble -->
+          <path class="t" d="M182 112H342V198H316V226L288 198H182Z"/>
+          <g class="a-showa"><circle class="i a-dot" cx="236" cy="155" r="7"/><circle class="i a-dot d1" cx="262" cy="155" r="7"/><circle class="i a-dot d2" cx="288" cy="155" r="7"/></g>
+          <g class="a-showb"><path class="l" d="M202 134h120M202 152h120M202 170h76"/></g>
+        </svg>
+      </div>
+    </div>
+    <dl>
+      <dt data-i="q.1q">Berapa biayanya?</dt><dd data-i="q.1a">Tergantung ruang lingkup. Kami tidak memasang harga di halaman ini karena angka tanpa konteks menyesatkan. Setelah sesi pertama, Anda mendapat perkiraan biaya dan tahapan tertulis.</dd>
+      <dt data-i="q.2q">Berapa lama pengerjaannya?</dt><dd data-i="q.2a">Versi pertama dirancang sekecil mungkin supaya cepat diuji. Estimasi waktu diberikan setelah kebutuhan dipetakan, bukan sebelumnya.</dd>
+      <dt data-i="q.3q">Siapa pemilik kode dan datanya?</dt><dd data-i="q.3a">Hal ini disepakati tertulis sejak awal. Pendekatan kami memastikan Anda mendapat dokumentasi yang cukup untuk berpindah tim kapan pun.</dd>
+      <dt data-i="q.4q">Setelah rilis, apa yang terjadi?</dt><dd data-i="q.4a">Aplikasi bisa kami rawat atau diserahkan ke tim Anda. Dua-duanya didukung oleh dokumentasi dan catatan keputusan yang sama.</dd>
+      <dt data-i="q.5q">Bisa bayar untuk konsultasi saja?</dt><dd data-i="q.5a">Bisa. Review arsitektur, penyusunan standar kode, dan penajaman model bisnis dapat diambil tanpa proyek pembangunan.</dd>
+      <dt data-i="q.6q">Bagaimana mulainya?</dt><dd data-i="q.6a">Kirim ringkasan singkat lewat formulir di bawah. Kami membalas lewat email untuk menjadwalkan percakapan awal.</dd>
     </dl>
   </div>
 </section>
@@ -314,106 +546,290 @@ footer a:hover{color:#14B8A6}
 <section class="sec contact" id="kontak">
   <div class="w g">
     <div>
-      <div class="label mono"><b>07</b><span>Mulai di sini</span></div>
-      <h2>Ceritakan idenya.</h2>
-      <a class="mail" href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a>
-      <p>Tulis dalam beberapa kalimat: apa yang ingin dibangun, untuk siapa, dan bagaimana ia akan menghasilkan uang. Kami balas lewat email, biasanya dalam satu sampai dua hari kerja.</p>
+      <div class="label mono"><b>07</b><span data-i="k.label">Mulai di sini</span></div>
+      <h2 data-i="k.h2">Ceritakan idenya.</h2>
+      
+      <p data-i="k.p">Tulis dalam beberapa kalimat: apa yang ingin dibangun, untuk siapa, dan bagaimana ia akan menghasilkan uang. Kami balas lewat email, biasanya dalam satu sampai dua hari kerja.</p>
+      <div class="figbox">
+        <svg class="fig on-band" viewBox="0 0 360 220" aria-hidden="true">
+          <path class="l dash a-flow" d="M24 50C110 6 140 128 206 112"/>
+          <g class="a-bump"><rect class="c" x="170" y="104" width="160" height="100"/><path class="l" d="M170 104L250 166 330 104"/><path class="l" d="M170 204L222 150M330 204L278 150"/></g>
+          <g><path class="t" d="M16 0L-16 -10L-9 0L-16 10Z"/><animateMotion dur="3.4s" repeatCount="indefinite" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1" path="M24 50C110 6 140 128 206 112"/></g>
+        </svg>
+      </div>
     </div>
     <form id="f" action="https://formsubmit.co/runsmyid@gmail.com" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Pesan baru dari website Runs MyId">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
       <div class="two">
-        <label class="f">Nama<input name="nama" required autocomplete="name"></label>
-        <label class="f">Email<input name="email" type="email" required autocomplete="email"></label>
+        <label class="f"><span data-i="k.name">Nama</span><input name="nama" required autocomplete="name"></label>
+        <label class="f"><span>Email</span><input name="email" type="email" required autocomplete="email"></label>
       </div>
       <div class="two">
-        <label class="f">Perusahaan (opsional)<input name="perusahaan" autocomplete="organization"></label>
-        <label class="f">Yang dibutuhkan
+        <label class="f"><span data-i="k.co">Perusahaan (opsional)</span><input name="perusahaan" autocomplete="organization"></label>
+        <label class="f"><span data-i="k.need">Yang dibutuhkan</span>
           <select name="kebutuhan">
-            <option>Aplikasi baru</option><option>Produk langganan (SaaS)</option><option>Konsultasi arsitektur &amp; standar</option>
-            <option>Integrasi &amp; otomasi</option><option>Perawatan aplikasi</option><option>Belum tahu</option>
+            <option value="Aplikasi baru" data-i="k.o1">Aplikasi baru</option>
+            <option value="Produk langganan (SaaS)" data-i="k.o2">Produk langganan (SaaS)</option>
+            <option value="Konsultasi arsitektur &amp; standar" data-i="k.o3">Konsultasi arsitektur &amp; standar</option>
+            <option value="Integrasi &amp; otomasi" data-i="k.o4">Integrasi &amp; otomasi</option>
+            <option value="Perawatan aplikasi" data-i="k.o5">Perawatan aplikasi</option>
+            <option value="Belum tahu" data-i="k.o6">Belum tahu</option>
           </select>
         </label>
       </div>
-      <label class="f">Ceritanya<textarea name="pesan" required placeholder="Apa yang ingin dibangun, untuk siapa, dan dari mana uangnya?"></textarea></label>
-      <button class="btn" type="submit" id="btn">Kirim</button>
+      <label class="f"><span data-i="k.msg">Ceritanya</span><textarea name="pesan" required placeholder="Apa yang ingin dibangun, untuk siapa, dan dari mana uangnya?" data-ia="placeholder:k.ph"></textarea></label>
+      <button class="btn" type="submit" id="btn" data-i="k.send">Kirim</button>
       <div id="msg" role="status" aria-live="polite"></div>
-      <p class="fine">Dengan mengirim, Anda menyetujui <a href="terms.html">Syarat</a> dan <a href="privacy.html">Kebijakan Privasi</a> kami. Pesan diteruskan ke runsmyid@gmail.com lewat layanan penerus formulir pihak ketiga dan hanya dipakai untuk menanggapi Anda.</p>
+      <p class="fine" data-i="k.fine">Dengan mengirim, Anda menyetujui <a href="terms.html">Syarat</a> dan <a href="privacy.html">Kebijakan Privasi</a> kami. Pesan diteruskan ke runsmyid@gmail.com lewat layanan penerus formulir pihak ketiga dan hanya dipakai untuk menanggapi Anda.</p>
     </form>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="w mono"><span>© <span id="yr"></span> Runs MyId</span><span><a href="terms.html">Syarat / Terms</a> · <a href="privacy.html">Privasi / Privacy</a></span><a href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a></div>
+  <div class="w mono">
+    <span>© <span id="yr"></span> Runs MyId</span>
+    <span><a href="terms.html" data-i="ft.terms">Syarat</a> · <a href="privacy.html" data-i="ft.privacy">Privasi</a></span>
+    
+  </div>
 </footer>
 
 <script>
-document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+'use strict';
+var W3F_KEY='5473ee94-04ae-4760-99e0-e4384129b3e3';
+var root=document.documentElement;
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
 
-/* ---- kalkulator titik impas ---- */
-const $=id=>document.getElementById(id);
-const num=id=>Math.max(0,parseFloat(String($(id).value).replace(/[^\d.]/g,''))||0);
-const rp=n=>(n<0?'–':'')+'Rp'+Math.abs(Math.round(n)).toLocaleString('id-ID');
-function calc(){
-  const build=num('c-build'),ops=num('c-ops'),users=num('c-users'),price=num('c-price');
-  const margin=users*price-ops;
-  $('r-margin').textContent=rp(margin);
-  $('r-be').textContent=price>0?Math.ceil(ops/price).toLocaleString('id-ID')+' orang':'–';
-  const pay=$('r-pay');
-  if(margin>0){const m=Math.ceil(build/margin);pay.className='big';pay.textContent=m>120?'> 10 tahun':m+' bulan'}
-  else{pay.className='big neg';pay.textContent='Belum balik modal'}
-  // grafik kas kumulatif 36 bulan
-  const N=36,pts=[];for(let i=0;i<=N;i++)pts.push(-build+margin*i);
-  const lo=Math.min(...pts,0),hi=Math.max(...pts,0),rng=(hi-lo)||1;
-  const y=v=>90-((v-lo)/rng)*84,x=i=>(i/N)*300;
-  const zero=y(0).toFixed(1);
-  const d=pts.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
-  $('chart').innerHTML=`<line x1="0" x2="300" y1="${zero}" y2="${zero}" stroke="#14130F" stroke-width="1" stroke-dasharray="4 3"/><path d="${d}" fill="none" stroke="${margin>0?'#0B7A68':'#C2410C'}" stroke-width="2.4" vector-effect="non-scaling-stroke"/>`;
+/* ---------- English dictionary (Indonesian is the in-HTML source) ---------- */
+var EN={
+'nav.principles':'Principles','nav.services':'Services','nav.process':'Process','nav.faq':'FAQ','nav.cta':'Talk to us',
+'ui.lang':'Language','ui.theme':'Toggle theme',
+'hero.eyebrow':'Apps / business / numbers',
+'hero.h1':'An app is an <em>investment</em>, not an <s>IT project</s>.',
+'hero.lead':'We build apps for business owners who want the numbers first: what it costs, when it pays back, and where the money comes from. The code follows, written cleanly so it does not become a burden three years from now.',
+'hero.cta1':'Tell us your idea','hero.cta2':'What we do',
+'calc.aria':'Break-even calculator','calc.title':'Calculate first, build later',
+'calc.sub':'The figures below are only an example. Replace them with your own to see when the app starts making money.',
+'calc.build':'Build cost (Rp)','calc.ops':'Running cost / month (Rp)','calc.users':'Paying customers','calc.price':'Price / customer / month (Rp)',
+'calc.margin':'Net profit / month','calc.be':'Minimum customers to break even','calc.pay':'Payback',
+'calc.note':'Cumulative cash over 36 months. A line below zero means you have not paid back yet.',
+'p.label':'How we think','p.h2':'Four rules we hold to.',
+'p.a.h':'Ask about the money first.','p.a.p':'Before we talk features, we ask who will pay, how much, and why. An app with no answer to that is not ready to be built.',
+'p.b.h':'Small, then proven.','p.b.p':'The first version contains only what is needed to test one business hypothesis. Extra features wait for evidence from real users.',
+'p.c.h':'Write for the next person.','p.c.p':'Every technical decision is recorded, project structure is uniform, and components are reused. Whoever takes over, including your own team, does not start from zero.',
+'p.d.h':'Secure from the first page.','p.d.p':'User identity, access rights, and data are treated as part of the design, not a patch added before release.',
+'s.label':'Scope of work','s.h2':'What we can do.',
+'s.intro':'You can take a single line, such as architecture consulting without a build project, or all of it from idea to operations.',
+'s.th1':'No.','s.th2':'Service','s.th3':'What you walk away with','s.th4':'Best for',
+'s.r1.a':'Sharpening the app business model','s.r1.b':'A product requirements document, feature priorities, and a break-even calculation.','s.r1.c':'Ideas where the money is still unclear.',
+'s.r2.a':'Web apps &amp; APIs','s.r2.b':'Systems that run on your servers, with documentation and tests.','s.r2.c':'Internal tools and customer-facing products.',
+'s.r3.a':'Android &amp; iOS apps','s.r3.b':'Store-ready apps, including icons, store assets, and an update flow.','s.r3.c':'Businesses whose customers live on their phones.',
+'s.r4.a':'Subscription products (SaaS)','s.r4.b':'Accounts, pricing plans, recurring billing, and an admin panel for you as the owner.','s.r4.c':'Products billed monthly or yearly.',
+'s.r5.a':'Architecture &amp; team standards','s.r5.b':'System design, decision records, project structure, and coding rules.','s.r5.c':'Teams whose system is getting hard to change.',
+'s.r6.a':'Integration &amp; automation','s.r6.b':'Connections to payments, ERP, CRM, or other services to cut manual work.','s.r6.c':'Processes still running on copy and paste.',
+'s.r7.a':'Operations &amp; maintenance','s.r7.b':'Scheduled releases, monitoring, backups, and fixes after the app is live.','s.r7.c':'Apps that must stay up.',
+'f.label':'Project selection','f.h2':'We are honest about what fits and what does not.',
+'f.yes':'We take','f.no':'We decline',
+'f.y1':'Business owners who can explain who the customer is and why they would pay.','f.y2':'Products that will live for years and need to be maintained properly.','f.y3':'Teams that want their system documented so they can carry it on themselves.','f.y4':'Partial work, such as architecture reviews or writing standards.',
+'f.n1':'Projects where the deadline is fixed first and the scope comes later.','f.n2':'Features requested only because a competitor has them.','f.n3':'Apps with no revenue plan or measurable goal.','f.n4':'Work that asks for shortcuts on user data security.',
+'a.label':'Order of work','a.h2':'Five stages, each with a handover.',
+'a.t1':'STAGE 1','a.1h':'Calculate','a.1p':'Test the business model, users, and break-even point with you.','a.1o':'→ Requirements doc + calculation',
+'a.t2':'STAGE 2','a.2h':'Design','a.2p':'Decide on architecture, screen flow, and the limits of version one.','a.2o':'→ Design + decision records',
+'a.t3':'STAGE 3','a.3h':'Build','a.3p':'Incremental development with code review and automated tests.','a.3o':'→ A demo every iteration',
+'a.t4':'STAGE 4','a.4h':'Test &amp; release','a.4p':'Acceptance testing with you, then release to a server or app store.','a.4o':'→ Live app + guide',
+'a.t5':'STAGE 5','a.5h':'Maintain','a.5p':'Watch real usage and improve based on data, not guesses.','a.5o':'→ Periodic report',
+'u.label':'About us','u.h2':'A small studio, high standards.',
+'u.p1':'Runs MyId is an app development studio in Indonesia that works on architecture and standards, not just adding features. We build frameworks, project templates, and reusable components, so every new project runs faster and cheaper than the last.',
+'u.p2':'Our name is deliberately read two ways: <em>runs my ID</em> (securely running your users’ identities and accounts) and <em>runs my idea</em> (running your idea until it is live).',
+'u.tools':'Tools we use',
+'u.stack':'<span>Python</span> and <span>Django</span> for systems, <span>PostgreSQL</span> for data, <span>Celery</span> for background jobs, <span>HTMX</span> and JavaScript for interfaces, <span>Docker</span> for delivery, and Android and iOS for mobile apps.',
+'q.label':'Questions','q.h2':'What people usually ask first.',
+'q.1q':'How much does it cost?','q.1a':'It depends on scope. We do not put prices on this page because a number without context misleads. After the first session you get a written estimate and stages.',
+'q.2q':'How long does it take?','q.2a':'The first version is designed to be as small as possible so it can be tested quickly. A time estimate is given after the requirements are mapped, not before.',
+'q.3q':'Who owns the code and the data?','q.3a':'This is agreed in writing from the start. Our approach ensures you get enough documentation to switch teams at any time.',
+'q.4q':'What happens after release?','q.4a':'We can maintain the app, or hand it over to your team. Both are supported by the same documentation and decision records.',
+'q.5q':'Can I pay for consulting only?','q.5a':'Yes. Architecture reviews, code standards, and business-model sharpening can be taken without a build project.',
+'q.6q':'How do we start?','q.6a':'Send a short summary through the form below. We reply by email to schedule an initial conversation.',
+'k.label':'Start here','k.h2':'Tell us your idea.',
+'k.p':'Write a few sentences: what you want to build, for whom, and how it will make money. We reply by email, usually within one to two business days.',
+'k.name':'Name','k.co':'Company (optional)','k.need':'What you need','k.msg':'Your story',
+'k.ph':'What do you want to build, for whom, and where does the money come from?',
+'k.o1':'New app','k.o2':'Subscription product (SaaS)','k.o3':'Architecture &amp; standards consulting','k.o4':'Integration &amp; automation','k.o5':'App maintenance','k.o6':'Not sure yet',
+'k.send':'Send',
+'k.fine':'By sending, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>. Your message is forwarded to runsmyid@gmail.com through a third-party form relay and is used only to respond to you.',
+'ft.terms':'Terms','ft.privacy':'Privacy',
+'meta.title':'Runs MyId — Apps built for business, with the numbers first',
+'meta.desc':'Runs MyId builds web and mobile apps with a clear business model: break-even calculation, small first version, clean code, and secure by design.'
+};
+var M={
+id:{sending:'Mengirim…',sent:'Terima kasih. Pesan Anda sudah terkirim ke kami, kami balas lewat email.',
+ fillAll:'Mohon lengkapi nama, email, dan pesan.',badEmail:'Alamat email tampak belum benar.',
+ fail:'Pesan belum terkirim. Koneksi lambat atau layanan sedang bermasalah. Pilih salah satu cara di bawah agar pesan Anda tidak hilang:',
+ gmail:'Buka di Gmail',mailto:'Aplikasi email',copy:'Salin pesan',copied:'Tersalin',
+ never:'Tidak berlaku',months:'bulan',years:'tahun',beyond:'di luar grafik 36 bulan',cust:'pelanggan',
+ mailSubject:'Pesan baru dari website Runs MyId'},
+ en:{sending:'Sending…',sent:'Thank you. Your message has been sent. We will reply by email.',
+ fillAll:'Please fill in your name, email, and message.',badEmail:'That email address does not look right.',
+ fail:'Your message was not sent. The connection is slow or the service is having trouble. Use one of the options below so your message is not lost:',
+ gmail:'Open in Gmail',mailto:'Email app',copy:'Copy message',copied:'Copied',
+ never:'Not reached',months:'months',years:'years',beyond:'beyond the 36-month chart',cust:'customers',
+ mailSubject:'New message from the Runs MyId website'}
+};
+
+/* ---------- i18n ---------- */
+var ID={},IDA={},lang=root.dataset.lang||'id';
+$$('[data-i]').forEach(function(e){ID[e.getAttribute('data-i')]=e.innerHTML});
+$$('[data-ia]').forEach(function(e){e.getAttribute('data-ia').split(';').forEach(function(p){var a=p.split(':');IDA[a[1]]=e.getAttribute(a[0])})});
+ID['meta.title']=document.title;
+var md=$('meta[name="description"]');ID['meta.desc']=md?md.content:'';
+function t(k){return lang==='en'?(EN[k]!==undefined?EN[k]:ID[k]):ID[k]}
+function applyLang(l,persist){
+  lang=l;root.lang=l;root.dataset.lang=l;
+  $$('[data-i]').forEach(function(e){var v=t(e.getAttribute('data-i'));if(v!==undefined)e.innerHTML=v});
+  $$('[data-ia]').forEach(function(e){e.getAttribute('data-ia').split(';').forEach(function(p){var a=p.split(':');var v=t(a[1]);if(v!==undefined)e.setAttribute(a[0],v)})});
+  var tt=$('#theme');if(tt)tt.title=tt.getAttribute('aria-label');
+  document.title=t('meta.title');if(md)md.content=t('meta.desc');
+  $$('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===l?'true':'false')});
+  $$('input.num').forEach(function(i){fmtInput(i,false)});
+  calc();
+  if(persist)store('lang',l);
 }
-['c-build','c-ops','c-users','c-price'].forEach(id=>$(id).addEventListener('input',calc));calc();
+$$('.lang button').forEach(function(b){b.addEventListener('click',function(){applyLang(b.dataset.set,true)})});
 
-/* ---- formulir ---- */
-const f=$('f'),msg=$('msg'),btn=$('btn'),TO='runsmyid@gmail.com';
-const W3F_KEY='';   // tempel Access Key Web3Forms di sini (gratis, web3forms.com) agar pengiriman andal
+/* ---------- theme ---------- */
+var tm=$('meta[name="theme-color"]');
+function applyTheme(th,persist){
+  root.dataset.theme=th;
+  if(tm)tm.content=th==='dark'?'#14130F':'#F2EEE3';
+  var b=$('#theme');if(b)b.setAttribute('aria-pressed',th==='dark'?'true':'false');
+  if(persist)store('theme',th);
+}
+var tb=$('#theme');
+if(tb)tb.addEventListener('click',function(){applyTheme(root.dataset.theme==='dark'?'light':'dark',true)});
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){if(!store('theme'))applyTheme(e.matches?'dark':'light',false)})}catch(e){}
+
+/* ---------- number formatting ---------- */
+function sep(){return lang==='en'?',':'.'}
+function group(d){return d.replace(/\B(?=(\d{3})+(?!\d))/g,sep())}
+function digits(s){return String(s).replace(/\D/g,'').replace(/^0+(?=\d)/,'')}
+function val(el){return parseInt(digits(el.value)||'0',10)}
+function fmtInput(el,keepCaret){
+  var raw=el.value,pos=el.selectionStart,before=0;
+  if(keepCaret&&pos!=null)before=digits(raw.slice(0,pos)).length;
+  var d=digits(raw).slice(0,13),out=group(d);
+  el.value=out;
+  if(keepCaret&&pos!=null){
+    var n=0,i=0;
+    if(before>0){for(i=0;i<out.length;i++){if(/\d/.test(out[i]))n++;if(n===before){i++;break}}}
+    try{el.setSelectionRange(i,i)}catch(e){}
+  }
+}
+$$('input.num').forEach(function(i){
+  i.addEventListener('input',function(){fmtInput(i,true);calc()});
+  i.addEventListener('focus',function(){setTimeout(function(){try{i.select()}catch(e){}},0)});
+  i.addEventListener('keydown',function(e){
+    if(e.key.length===1&&!/\d/.test(e.key)&&!e.ctrlKey&&!e.metaKey)e.preventDefault();
+  });
+});
+
+/* ---------- calculator ---------- */
+function rp(n){return 'Rp '+group(String(Math.abs(Math.round(n))))}
+function signed(n){return (n<0?'− ':'')+rp(n)}
+function calc(){
+  var build=val($('#c-build')),ops=val($('#c-ops')),users=val($('#c-users')),price=val($('#c-price'));
+  var margin=users*price-ops,mm=M[lang];
+  $('#r-margin').textContent=signed(margin);
+  $('#r-margin').style.color=margin<0?'var(--red-t)':'';
+  $('#r-be').textContent=price>0?group(String(Math.ceil(ops/price)))+' '+mm.cust:'–';
+  var pay,months=null;
+  if(build===0)pay='0 '+mm.months;
+  else if(margin<=0)pay=mm.never;
+  else{
+    months=Math.ceil(build/margin);
+    if(months>=12){var y=Math.floor(months/12),r=months%12;pay=y+' '+mm.years+(r?' '+r+' '+mm.months:'')}
+    else pay=months+' '+mm.months;
+    if(months>36)pay+=' ('+mm.beyond+')';
+  }
+  $('#r-pay').textContent=pay;
+  chart(build,margin);
+}
+function chart(build,margin){
+  var svg=$('#chart'),W=300,H=96,P=6,N=36,pts=[],mn=-build,mx=-build,i,v;
+  for(i=0;i<=N;i++){v=-build+margin*i;pts.push(v);if(v<mn)mn=v;if(v>mx)mx=v}
+  if(mn>0)mn=0;if(mx<0)mx=0;if(mx===mn){mx=mn+1}
+  var X=function(k){return P+(W-2*P)*k/N},Y=function(val){return P+(H-2*P)*(1-(val-mn)/(mx-mn))};
+  var d='M'+pts.map(function(p,k){return X(k).toFixed(1)+' '+Y(p).toFixed(1)}).join('L');
+  var y0=Y(0).toFixed(1);
+  svg.innerHTML='<line x1="0" x2="'+W+'" y1="'+y0+'" y2="'+y0+'" stroke="var(--dash)" stroke-width="1" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/>'
+   +'<path id="cl" d="'+d+'" fill="none" stroke="'+(margin>0?'var(--teal)':'var(--red)')+'" stroke-width="2.2" stroke-linejoin="round" vector-effect="non-scaling-stroke" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s ease"/>';
+  var p=$('#cl');void p.getBoundingClientRect();p.style.strokeDashoffset='0';
+}
+
+/* ---------- form ---------- */
+var f=$('#f'),btn=$('#btn'),msg=$('#msg');
 function show(kind,text,d){
   msg.className=kind;msg.textContent=text;
-  if(d){
-    const body=`Nama: ${d.nama}\nEmail: ${d.email}\nPerusahaan: ${d.perusahaan||'-'}\nKebutuhan: ${d.kebutuhan}\n\n${d.pesan}`;
-    const subj='Pesan dari website Runs MyId';
-    const acts=document.createElement('div');acts.className='acts';
-    const g=document.createElement('a');g.target='_blank';g.rel='noopener';
-    g.href='https://mail.google.com/mail/?view=cm&fs=1&to='+TO+'&su='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);g.textContent='Kirim lewat Gmail';
-    const m=document.createElement('a');m.href='mailto:'+TO+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);m.textContent='Buka aplikasi email';
-    const c=document.createElement('button');c.type='button';c.textContent='Salin pesan';
-    c.onclick=async()=>{try{await navigator.clipboard.writeText(`Kepada: ${TO}\n\n${body}`);c.textContent='Tersalin'}catch(_){c.textContent='Gagal menyalin'}};
-    acts.append(g,m,c);msg.append(acts);
+  if(kind==='err'&&d){
+    var body='Nama: '+d.nama+'\nEmail: '+d.email+'\nPerusahaan: '+(d.perusahaan||'-')+'\nKebutuhan: '+d.kebutuhan+'\n\n'+d.pesan;
+    var sub=M[lang].mailSubject;
+    var wrap=document.createElement('div');wrap.className='acts';
+    var a1=document.createElement('a');a1.href='https://mail.google.com/mail/?view=cm&fs=1&to=runsmyid@gmail.com&su='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);a1.target='_blank';a1.rel='noopener';a1.textContent=M[lang].gmail;
+    var a2=document.createElement('a');a2.href='mailto:runsmyid@gmail.com?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);a2.textContent=M[lang].mailto;
+    var b=document.createElement('button');b.type='button';b.textContent=M[lang].copy;
+    b.onclick=function(){var done=function(){b.textContent=M[lang].copied};try{navigator.clipboard.writeText(body).then(done,done)}catch(e){done()}};
+    wrap.appendChild(a1);wrap.appendChild(a2);wrap.appendChild(b);msg.appendChild(wrap);
   }
-  msg.scrollIntoView({block:'nearest',behavior:'smooth'});
 }
-f.addEventListener('submit',async e=>{
+if(f)f.addEventListener('submit',function(e){
   e.preventDefault();
-  const d=Object.fromEntries(new FormData(f).entries());
-  if(!d.nama.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.pesan.trim()){show('err','Lengkapi nama, email yang valid, dan ceritanya.');return}
-  btn.disabled=true;btn.textContent='Mengirim…';show('','Mengirim pesan…');
-  const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),9000);   // jangan pernah menggantung
-  try{
-    let r,o;
-    if(W3F_KEY){   // Web3Forms (disarankan): isi W3F_KEY di atas
-      r=await fetch('https://api.web3forms.com/submit',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify({access_key:W3F_KEY,subject:'Pesan baru dari website Runs MyId',from_name:'Website Runs MyId',name:d.nama,email:d.email,perusahaan:d.perusahaan||'-',kebutuhan:d.kebutuhan,message:d.pesan})});
-    }else{         // cadangan: FormSubmit (butuh aktivasi email sekali)
-      r=await fetch('https://formsubmit.co/ajax/'+TO,{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
-    }
-    o=await r.json().catch(()=>({}));
-    if(!r.ok||String(o.success)!=='true')throw new Error(o.message||'gagal');
-    show('ok','Terkirim. Terima kasih, kami balas lewat email.');f.reset();
-  }catch(err){
-    const habis=err&&err.name==='AbortError';
-    show('err',(habis?'Server pengiriman tidak merespons. ':'Pesan belum bisa dikirim otomatis. ')+'Pakai salah satu cara ini supaya pesan Anda tetap sampai:',d);
-  }finally{clearTimeout(timer);btn.disabled=false;btn.textContent='Kirim'}
+  var fd=new FormData(f),d={};fd.forEach(function(v,k){d[k]=String(v).trim()});
+  if(!d.nama||!d.email||!d.pesan){show('err',M[lang].fillAll);return}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)){show('err',M[lang].badEmail);return}
+  d.bahasa=lang.toUpperCase();
+  btn.disabled=true;show('wait',M[lang].sending);
+  var ctl=new AbortController(),to=setTimeout(function(){ctl.abort()},9000),url,payload;
+  if(W3F_KEY){
+    url='https://api.web3forms.com/submit';
+    payload={access_key:W3F_KEY,subject:M[lang].mailSubject,from_name:d.nama,name:d.nama,email:d.email,perusahaan:d.perusahaan,kebutuhan:d.kebutuhan,pesan:d.pesan,bahasa:d.bahasa,botcheck:''};
+  }else{
+    url='https://formsubmit.co/ajax/runsmyid@gmail.com';
+    payload={_subject:M[lang].mailSubject,_template:'table',_captcha:'false',nama:d.nama,email:d.email,perusahaan:d.perusahaan,kebutuhan:d.kebutuhan,pesan:d.pesan,bahasa:d.bahasa};
+  }
+  fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:ctl.signal})
+    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,j:j}})})
+    .then(function(x){clearTimeout(to);
+      var ok=x.ok&&(x.j.success===true||x.j.success==='true'||(W3F_KEY?false:x.j.success!==false));
+      if(ok){f.reset();show('ok',M[lang].sent)}else show('err',M[lang].fail,d);
+    })
+    .catch(function(){clearTimeout(to);show('err',M[lang].fail,d)})
+    .then(function(){btn.disabled=false});
 });
+
+/* ---------- animations on view ---------- */
+var yr=$('#yr');if(yr)yr.textContent=new Date().getFullYear();
+var reduce=false;try{reduce=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+var targets=$$('.fig,.track');
+function setOn(el,on){
+  el.classList.toggle('on',on);
+  if(el.pauseAnimations){try{on?el.unpauseAnimations():el.pauseAnimations()}catch(e){}}
+}
+if(reduce||!('IntersectionObserver' in window)){
+  targets.forEach(function(el){el.classList.add('on');if(el.pauseAnimations&&reduce){try{el.pauseAnimations()}catch(e){}}});
+}else{
+  targets.forEach(function(el){if(el.pauseAnimations){try{el.pauseAnimations()}catch(e){}}});
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){setOn(en.target,en.isIntersecting)})},{threshold:.2});
+  targets.forEach(function(el){io.observe(el)});
+}
+
+/* ---------- init ---------- */
+applyTheme(root.dataset.theme||'light',false);
+applyLang(lang,false);
+})();
 </script>
 </body>
 </html>
