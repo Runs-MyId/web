@@ -1,0 +1,64 @@
+:root{
+  --paper:#F2EEE3;--paper2:#E9E4D5;--ink:#14130F;--mute:#5E5B50;--teal:#0B7A68;--teal-d:#075A4C;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--teal-d);text-underline-offset:3px}
+a:hover{color:var(--ink)}
+::selection{background:var(--teal);color:var(--paper)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.w{max-width:1000px;margin:0 auto;padding:0 28px}
+.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+
+/* language: hide the inactive language */
+html[data-lang="id"] [lang="en"].L,html[data-lang="en"] [lang="id"].L{display:none!important}
+
+header{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--serif);font-weight:800;font-size:24px;letter-spacing:-.03em}
+.brand img{height:38px;width:auto}
+.brand i{font-style:normal;color:var(--teal)}
+.tools{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end}
+.tools a.back{font-size:14px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}
+.lang{display:flex;border:1.5px solid var(--ink)}
+.lang button{font:500 12px var(--mono);letter-spacing:.06em;padding:7px 12px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lang button+button{border-left:1.5px solid var(--ink)}
+
+main{padding:64px 0 84px}
+.eyebrow{color:var(--teal);margin-bottom:16px;display:block}
+h1{font-family:var(--serif);font-weight:800;font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.03em;margin-bottom:18px}
+.meta{color:var(--mute);margin-bottom:34px}
+.notice{border:1.5px solid var(--ink);background:#FBF9F2;padding:16px 18px;font-size:15px;margin-bottom:40px;box-shadow:5px 5px 0 var(--teal)}
+nav.toc{border-top:1.5px solid var(--ink);padding:22px 0 26px;margin-bottom:6px}
+nav.toc p{margin-bottom:10px;color:var(--mute)}
+nav.toc ol{columns:2;column-gap:36px;padding-left:22px;font-size:15.5px}
+nav.toc li{break-inside:avoid;margin-bottom:4px}
+section.s{padding:30px 0;border-top:1px solid var(--ink)}
+section.s h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.2vw,32px);line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+section.s h2>span:first-child{font-family:var(--mono);font-size:13px;color:var(--teal);margin-right:10px;font-weight:500;letter-spacing:.06em;vertical-align:middle}
+section.s p{margin-bottom:12px;color:#2B2922}
+section.s ul{margin:6px 0 14px 22px;color:#2B2922}
+section.s li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:15px}
+th{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--mute);padding:0 12px 8px 0;border-bottom:1.5px solid var(--ink)}
+td{padding:11px 12px 11px 0;border-bottom:1px solid #b9b4a1;vertical-align:top;color:#2B2922}
+
+footer{background:var(--ink);color:#a8a493;padding:26px 0}
+footer .w{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{color:var(--paper)}
+
+@media(max-width:700px){
+  nav.toc ol{columns:1}
+  .w{padding:0 20px}
+  .brand{font-size:21px}.brand img{height:32px}
+  main{padding:44px 0 64px}
+  table,thead,tbody,tr,td{display:block}thead{display:none}
+  tr{padding:10px 0;border-bottom:1px solid #b9b4a1}td{border:0;padding:2px 0}
+}
+@media print{header,.lang,footer{display:none}body{background:#fff}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

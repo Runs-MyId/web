@@ -146,9 +146,11 @@ form textarea{min-height:130px;resize:vertical}
 #msg .acts a,#msg .acts button{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:8px 12px;border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer}
 #msg .acts button{background:transparent;color:var(--ink)}
 .contact form .fine{font-size:12.5px;color:var(--mute)}
+.contact form .fine a{color:var(--teal-d)}
 footer{background:var(--ink);color:#a8a493;padding:0 0 34px}
 footer .w{border-top:1px solid #3a382f;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a{color:var(--paper)}
+footer a:hover{color:#14B8A6}
 
 @media(max-width:920px){
   .hero .w,.cols,.contact .g,dl{grid-template-columns:1fr}
@@ -337,14 +339,14 @@ footer a{color:var(--paper)}
       <label class="f">Ceritanya<textarea name="pesan" required placeholder="Apa yang ingin dibangun, untuk siapa, dan dari mana uangnya?"></textarea></label>
       <button class="btn" type="submit" id="btn">Kirim</button>
       <div id="msg" role="status" aria-live="polite"></div>
-      <p class="fine">Pesan diteruskan ke runsmyid@gmail.com dan hanya dipakai untuk menanggapi Anda.</p>
+      <p class="fine">Dengan mengirim, Anda menyetujui <a href="terms.html">Syarat</a> dan <a href="privacy.html">Kebijakan Privasi</a> kami. Pesan diteruskan ke runsmyid@gmail.com lewat layanan penerus formulir pihak ketiga dan hanya dipakai untuk menanggapi Anda.</p>
     </form>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="w mono"><span>© <span id="yr"></span> Runs MyId</span><span>Studio aplikasi, Indonesia</span><a href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a></div>
+  <div class="w mono"><span>© <span id="yr"></span> Runs MyId</span><span><a href="terms.html">Syarat / Terms</a> · <a href="privacy.html">Privasi / Privacy</a></span><a href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a></div>
 </footer>
 
 <script>
@@ -374,7 +376,7 @@ function calc(){
 
 /* ---- formulir ---- */
 const f=$('f'),msg=$('msg'),btn=$('btn'),TO='runsmyid@gmail.com';
-const W3F_KEY='5473ee94-04ae-4760-99e0-e4384129b3e3';   // tempel Access Key Web3Forms di sini (gratis, web3forms.com) agar pengiriman andal
+const W3F_KEY='';   // tempel Access Key Web3Forms di sini (gratis, web3forms.com) agar pengiriman andal
 function show(kind,text,d){
   msg.className=kind;msg.textContent=text;
   if(d){
