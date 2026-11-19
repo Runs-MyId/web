@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Runs MyId — Bangun Aplikasi yang Bertumbuh dan Menguntungkan</title>
+<meta name="description" content="Runs MyId membantu bisnis merancang, membangun, dan menjalankan aplikasi web dan mobile yang aman, terukur, dan berorientasi pada keuntungan.">
+<meta name="theme-color" content="#0B1F1C">
+<meta property="og:title" content="Runs MyId — Aplikasi yang Bertumbuh dan Menguntungkan">
+<meta property="og:description" content="Rancang, bangun, dan jalankan aplikasi dengan standar enterprise. Konsultasi gratis.">
+<meta property="og:image" content="assets/og-image.png">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0B1F1C; --bg2:#0F2A26; --card:#12332E; --line:rgba(255,255,255,.09);
+  --teal:#2DD4BF; --teal2:#14B8A6; --deep:#047857; --text:#E8F5F2; --muted:#9BB8B2; --white:#fff;
+  --r:18px; --max:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:88px 0;position:relative}
+h1,h2,h3{line-height:1.15;color:var(--white);letter-spacing:-.02em}
+h2{font-size:clamp(28px,4vw,40px);margin-bottom:14px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.lead{color:var(--muted);max-width:620px;font-size:18px}
+.center{text-align:center}.center .lead{margin:0 auto}
+
+/* abstract background shapes */
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none;z-index:0}
+.b1{width:420px;height:420px;background:var(--teal2);top:-120px;right:-100px}
+.b2{width:360px;height:360px;background:var(--deep);bottom:-140px;left:-120px}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);z-index:0}
+
+/* nav */
+header{position:sticky;top:0;z-index:50;background:rgba(11,31,28,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;color:var(--white)}
+.brand img{width:36px;height:36px;border-radius:9px}
+.brand span b{color:var(--teal)}
+.menu{display:flex;gap:28px;align-items:center;font-size:15px;color:var(--muted)}
+.menu a:hover{color:var(--white)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:12px;font-weight:600;font-size:15px;border:0;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--teal),var(--deep));color:#04201B;box-shadow:0 10px 30px -10px rgba(45,212,191,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(45,212,191,.8)}
+.btn-ghost{border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.nav .btn{padding:10px 18px;font-size:14px}
+
+/* hero */
+.hero{padding:100px 0 90px;overflow:hidden}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(36px,5.6vw,60px);margin-bottom:20px}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--teal),#A7F3D0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:19px;color:var(--muted);max-width:560px;margin-bottom:32px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.trust{display:flex;gap:26px;margin-top:38px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.trust span:before{content:"✓";color:var(--teal);margin-right:8px;font-weight:700}
+.art{position:relative;aspect-ratio:1;max-width:420px;margin:0 auto;width:100%}
+.art .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(45,212,191,.35);animation:spin 40s linear infinite}
+.art .ring:nth-child(2){inset:12%;border-color:rgba(45,212,191,.22);animation-duration:28s;animation-direction:reverse}
+.art .ring:nth-child(3){inset:26%;border-style:dashed;animation-duration:50s}
+.art .ring:before{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 18px var(--teal)}
+.art img{position:absolute;inset:30%;width:40%;height:40%;border-radius:28%;box-shadow:0 30px 70px -20px rgba(45,212,191,.55);animation:float 6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.card{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:30px;transition:.25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:rgba(45,212,191,.45)}
+.card .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:rgba(45,212,191,.12);color:var(--teal);font-size:22px;margin-bottom:18px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15.5px}
+.alt{background:var(--bg2)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;counter-reset:s}
+.step{padding:26px;border-left:2px solid var(--teal2);background:rgba(255,255,255,.025);border-radius:0 var(--r) var(--r) 0;counter-increment:s}
+.step:before{content:"0" counter(s);font-size:13px;font-weight:700;color:var(--teal);letter-spacing:.1em}
+.step h3{font-size:18px;margin:6px 0}
+.step p{font-size:15px;color:var(--muted)}
+
+/* value split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.list{list-style:none;margin-top:26px;display:grid;gap:16px}
+.list li{display:flex;gap:14px;color:var(--muted)}
+.list li b{color:var(--white);display:block;font-size:16px}
+.list li:before{content:"";flex:none;width:22px;height:22px;margin-top:3px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--deep));-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/contain no-repeat}
+.panel{background:linear-gradient(160deg,var(--card),var(--bg));border:1px solid var(--line);border-radius:24px;padding:34px}
+.bars{display:grid;gap:18px}
+.bar label{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:7px}
+.bar div{height:10px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--deep),var(--teal))}
+.panel small{display:block;margin-top:20px;color:var(--muted);font-size:12.5px}
+
+/* tech chips + faq */
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:34px}
+.chips span{padding:9px 18px;border:1px solid var(--line);border-radius:99px;font-size:14px;color:var(--muted);background:rgba(255,255,255,.03)}
+.faq{max-width:760px;margin:44px auto 0;display:grid;gap:12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+summary{cursor:pointer;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--teal);font-size:22px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{color:var(--muted);margin-top:10px;font-size:15.5px}
+
+/* contact */
+.contact{overflow:hidden}
+.contact .wrap{position:relative;z-index:1;display:grid;grid-template-columns:.9fr 1.1fr;gap:48px}
+.info{display:grid;gap:18px;margin-top:28px}
+.info div{display:flex;gap:14px;align-items:flex-start;color:var(--muted)}
+.info b{display:block;color:var(--white)}
+.info .ic{width:42px;height:42px;flex:none;border-radius:12px;background:rgba(45,212,191,.12);color:var(--teal);display:grid;place-items:center;font-size:19px}
+form{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:24px;padding:32px;display:grid;gap:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label.f{display:grid;gap:7px;font-size:14px;color:var(--muted)}
+input,select,textarea{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--white);font:inherit;font-size:15px;outline:none;transition:.2s}
+input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(45,212,191,.15)}
+select option{background:var(--bg2)}
+textarea{min-height:130px;resize:vertical}
+.hp{position:absolute;left:-9999px;opacity:0}
+#msg{font-size:14.5px;min-height:22px}
+#msg.ok{color:var(--teal)}#msg.err{color:#FCA5A5}
+.note{font-size:12.5px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+@media(max-width:900px){
+  .hero .wrap,.split,.contact .wrap{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}
+  .menu a:not(.btn){display:none}.art{max-width:300px;order:-1}
+  section{padding:68px 0}
+}
+@media(max-width:560px){.cards,.steps,.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><img src="assets/logo/logo-master.svg" alt="Logo Runs MyId"><span>Runs<b>MyId</b></span></a>
+    <nav class="menu">
+      <a href="#layanan">Layanan</a><a href="#proses">Proses</a><a href="#nilai">Keunggulan</a><a href="#faq">FAQ</a>
+      <a href="#kontak" class="btn btn-primary">Konsultasi Gratis</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="grid-bg"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Solusi Aplikasi untuk Bisnis</span>
+      <h1>Aplikasi yang tidak hanya jalan, tapi <em>menghasilkan</em>.</h1>
+      <p>Runs MyId membantu perusahaan merancang, membangun, dan menjalankan aplikasi web dan mobile yang aman, terukur, dan berorientasi pada pertumbuhan pendapatan.</p>
+      <div class="cta">
+        <a href="#kontak" class="btn btn-primary">Mulai Proyek Anda →</a>
+        <a href="#layanan" class="btn btn-ghost">Lihat Layanan</a>
+      </div>
+      <div class="trust"><span>Standar terdokumentasi</span><span>Siap dikembangkan tim</span><span>Keamanan sejak desain</span></div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+      <img src="assets/logo/logo-master.svg" alt="">
+    </div>
+  </div>
+</section>
+
+<section id="tentang" class="alt">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Tentang Kami</span>
+      <h2>Membangun sistem yang terstandarisasi dan mudah dipelihara.</h2>
+      <p class="lead">Runs MyId adalah mitra teknologi untuk bisnis yang ingin memiliki aplikasi sebagai aset, bukan sekadar biaya. Kami fokus pada arsitektur yang rapi, standar pengembangan yang jelas, dan komponen yang dapat dipakai ulang di banyak proyek, sehingga biaya turun dan kecepatan rilis naik dari waktu ke waktu.</p>
+    </div>
+    <ul class="list">
+      <li><div><b>Arsitektur dulu, kode kemudian</b>Keputusan teknis dicatat dan bisa diaudit oleh tim Anda.</div></li>
+      <li><div><b>Framework dan starter kit reusable</b>Proyek berikutnya dimulai dari fondasi yang sudah teruji.</div></li>
+      <li><div><b>Dokumentasi lengkap</b>Tim internal dapat melanjutkan pengembangan tanpa ketergantungan pada kami.</div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="layanan">
+  <div class="wrap center">
+    <span class="eyebrow">Layanan</span>
+    <h2>Dari ide sampai aplikasi yang menghasilkan</h2>
+    <p class="lead">Satu mitra untuk seluruh siklus produk, mulai dari strategi hingga operasional harian.</p>
+    <div class="cards" style="text-align:left">
+      <article class="card"><div class="ic">◈</div><h3>Pengembangan Aplikasi Custom</h3><p>Aplikasi web, API, dan mobile yang dirancang sesuai alur bisnis Anda, siap tumbuh bersama jumlah pengguna.</p></article>
+      <article class="card"><div class="ic">◎</div><h3>Produk SaaS &amp; Platform</h3><p>Bangun produk berlangganan dengan multi-tenant, penagihan, dan manajemen pengguna sejak versi pertama.</p></article>
+      <article class="card"><div class="ic">⬡</div><h3>Konsultasi Arsitektur &amp; Standar</h3><p>Rancangan sistem, ADR, struktur proyek, dan standar kode agar tim bekerja konsisten dan mudah diaudit.</p></article>
+      <article class="card"><div class="ic">⛨</div><h3>Keamanan &amp; Identitas</h3><p>Autentikasi, otorisasi, dan perlindungan data yang dirancang sejak awal, bukan ditambal di akhir.</p></article>
+      <article class="card"><div class="ic">⟳</div><h3>Integrasi &amp; Otomasi</h3><p>Hubungkan aplikasi dengan sistem pembayaran, ERP, CRM, dan layanan pihak ketiga untuk mengurangi kerja manual.</p></article>
+      <article class="card"><div class="ic">☁</div><h3>Deploy, Monitoring &amp; Maintenance</h3><p>Pipeline rilis, pemantauan, backup, dan dukungan berkelanjutan agar aplikasi tetap stabil.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="proses" class="alt">
+  <div class="wrap center">
+    <span class="eyebrow">Cara Kerja</span>
+    <h2>Proses jelas, hasil terukur</h2>
+    <p class="lead">Setiap tahap punya keluaran yang dapat Anda tinjau dan setujui.</p>
+    <div class="steps" style="text-align:left">
+      <div class="step"><h3>Discovery</h3><p>Memahami tujuan bisnis, pengguna, dan sumber pendapatan. Keluaran: PRD dan prioritas fitur.</p></div>
+      <div class="step"><h3>Desain</h3><p>Arsitektur, alur pengguna, dan wireframe. Keluaran: dokumen desain dan ADR.</p></div>
+      <div class="step"><h3>Build</h3><p>Pengembangan iteratif dengan review kode dan pengujian otomatis. Demo di setiap sprint.</p></div>
+      <div class="step"><h3>Launch &amp; Tumbuh</h3><p>UAT, rilis, pemantauan, dan perbaikan berkelanjutan berdasarkan data penggunaan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="nilai">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Keunggulan</span>
+      <h2>Dibangun untuk jangka panjang, bukan sekali pakai.</h2>
+      <p class="lead">Aplikasi yang menguntungkan adalah aplikasi yang murah dipelihara, cepat diubah, dan dipercaya penggunanya.</p>
+      <ul class="list">
+        <li><div><b>Production-ready</b>Pengujian, logging, dan pipeline rilis menjadi bagian standar, bukan tambahan.</div></li>
+        <li><div><b>Scalable &amp; team-extensible</b>Struktur modular sehingga fitur dan anggota tim baru mudah ditambahkan.</div></li>
+        <li><div><b>Transparan</b>Progres, keputusan teknis, dan biaya dapat Anda pantau kapan saja.</div></li>
+      </ul>
+    </div>
+    <div class="panel" aria-label="Ilustrasi fokus kualitas">
+      <div class="bars">
+        <div class="bar"><label><span>Fokus pada nilai bisnis</span><span>Prioritas utama</span></label><div><i style="width:94%"></i></div></div>
+        <div class="bar"><label><span>Kemudahan pemeliharaan</span><span>Prioritas utama</span></label><div><i style="width:90%"></i></div></div>
+        <div class="bar"><label><span>Keamanan &amp; audit</span><span>Prioritas utama</span></label><div><i style="width:88%"></i></div></div>
+        <div class="bar"><label><span>Kecepatan rilis</span><span>Prioritas tinggi</span></label><div><i style="width:80%"></i></div></div>
+      </div>
+      <small>Ilustrasi prinsip kerja kami, bukan hasil pengukuran.</small>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap center">
+    <span class="eyebrow">Teknologi</span>
+    <h2>Teknologi modern yang teruji</h2>
+    <p class="lead">Kami memilih alat yang stabil, terdokumentasi, dan mudah dicari talenanya.</p>
+    <div class="chips"><span>Python / Django</span><span>REST API</span><span>PostgreSQL</span><span>Celery</span><span>HTMX</span><span>JavaScript</span><span>Docker</span><span>Android &amp; iOS</span><span>CI/CD</span></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap center">
+    <span class="eyebrow">FAQ</span>
+    <h2>Pertanyaan yang sering diajukan</h2>
+    <div class="faq" style="text-align:left">
+      <details><summary>Berapa lama waktu pengerjaan sebuah aplikasi?</summary><p>Tergantung cakupan. Setelah sesi discovery, kami memberikan estimasi waktu dan tahapan rilis, biasanya diawali versi awal (MVP) agar Anda bisa menguji pasar lebih cepat.</p></details>
+      <details><summary>Apakah kode dan dokumentasi menjadi milik kami?</summary><p>Hal ini dibahas dan disepakati dalam kontrak kerja. Pendekatan kami memastikan tim Anda mendapat dokumentasi yang cukup untuk melanjutkan pengembangan sendiri.</p></details>
+      <details><summary>Apakah tersedia dukungan setelah aplikasi rilis?</summary><p>Ya. Kami menyediakan paket maintenance, pemantauan, dan pengembangan lanjutan sesuai kebutuhan.</p></details>
+      <details><summary>Bisakah kami hanya meminta konsultasi arsitektur?</summary><p>Bisa. Kami menerima konsultasi arsitektur, review sistem, dan penyusunan standar pengembangan tanpa harus mengerjakan seluruh proyek.</p></details>
+      <details><summary>Bagaimana cara memulai?</summary><p>Isi formulir di bawah. Kami akan membalas melalui email untuk menjadwalkan sesi konsultasi awal tanpa biaya.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="kontak" class="contact alt">
+  <div class="blob b2" style="opacity:.25"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Kontak</span>
+      <h2>Ceritakan kebutuhan aplikasi Anda.</h2>
+      <p class="lead">Kirim pesan dan kami akan membalas melalui email untuk menjadwalkan konsultasi awal.</p>
+      <div class="info">
+        <div><span class="ic">✉</span><span><b>Email</b><a href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a></span></div>
+        <div><span class="ic">◷</span><span><b>Respons</b>Umumnya dalam 1–2 hari kerja</span></div>
+        <div><span class="ic">◉</span><span><b>Layanan</b>Indonesia dan remote</span></div>
+      </div>
+    </div>
+
+    <form id="contactForm" action="https://formsubmit.co/runsmyid@gmail.com" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Pesan baru dari website Runs MyId">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="row">
+        <label class="f">Nama*<input name="nama" required autocomplete="name" placeholder="Nama lengkap"></label>
+        <label class="f">Email*<input name="email" type="email" required autocomplete="email" placeholder="nama@perusahaan.com"></label>
+      </div>
+      <div class="row">
+        <label class="f">Perusahaan<input name="perusahaan" autocomplete="organization" placeholder="Opsional"></label>
+        <label class="f">Kebutuhan
+          <select name="kebutuhan">
+            <option>Pengembangan aplikasi custom</option>
+            <option>Produk SaaS / platform</option>
+            <option>Konsultasi arsitektur &amp; standar</option>
+            <option>Integrasi &amp; otomasi</option>
+            <option>Maintenance aplikasi</option>
+            <option>Lainnya</option>
+          </select>
+        </label>
+      </div>
+      <label class="f">Pesan*<textarea name="pesan" required placeholder="Ceritakan tujuan, target pengguna, dan jadwal yang Anda harapkan"></textarea></label>
+      <button class="btn btn-primary" type="submit" id="sendBtn">Kirim Pesan</button>
+      <div id="msg" role="status" aria-live="polite"></div>
+      <p class="note">Pesan diteruskan ke runsmyid@gmail.com. Data Anda hanya digunakan untuk menanggapi permintaan ini.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand"><img src="assets/logo/logo-master.svg" alt="" style="width:30px;height:30px"><span>Runs<b>MyId</b></span></a>
+    <span>© <span id="yr"></span> Runs MyId. Seluruh hak dilindungi.</span>
+    <a href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+const form = document.getElementById('contactForm'), msg = document.getElementById('msg'), btn = document.getElementById('sendBtn');
+const TO = 'runsmyid@gmail.com';
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(form).entries());
+  msg.className = '';
+  if (d._honey) return;
+  if (!d.nama.trim() || !/^\S+@\S+\.\S+$/.test(d.email) || !d.pesan.trim()) {
+    msg.className = 'err'; msg.textContent = 'Mohon lengkapi nama, email yang valid, dan pesan.'; return;
+  }
+  btn.disabled = true; btn.textContent = 'Mengirim...';
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/' + TO, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify(d)
+    });
+    const out = await res.json();
+    if (!res.ok || out.success === 'false') throw new Error();
+    msg.className = 'ok'; msg.textContent = 'Terima kasih! Pesan Anda terkirim. Kami akan membalas melalui email.';
+    form.reset();
+  } catch (err) {
+    const body = `Nama: ${d.nama}\nEmail: ${d.email}\nPerusahaan: ${d.perusahaan||'-'}\nKebutuhan: ${d.kebutuhan}\n\n${d.pesan}`;
+    window.location.href = `mailto:${TO}?subject=${encodeURIComponent('Pesan dari website Runs MyId')}&body=${encodeURIComponent(body)}`;
+    msg.className = 'err'; msg.textContent = 'Pengiriman otomatis gagal. Aplikasi email Anda dibuka sebagai alternatif.';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Kirim Pesan';
+  }
+});
+</script>
+</body>
+</html>
