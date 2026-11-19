@@ -36,13 +36,10 @@ h2{font-size:clamp(34px,5vw,58px);max-width:20ch}
 .label b{color:var(--teal);font-weight:500}
 
 /* top strip */
-.strip{background:var(--ink);color:var(--paper);padding:8px 0}
-.strip .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.strip a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,.4)}
 header{border-bottom:1.5px solid var(--rule)}
 .bar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:20px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--serif);font-weight:800;font-size:26px;letter-spacing:-.03em}
-.brand img{width:38px;height:38px}
+.brand img{height:42px;width:auto}
 .brand i{font-style:normal;color:var(--teal)}
 nav{display:flex;gap:26px;align-items:center}
 nav a{text-decoration:none;font-size:15px}
@@ -60,7 +57,7 @@ nav a:hover{color:var(--teal)}
 .hero h1 s{text-decoration-thickness:.07em;text-decoration-color:var(--red)}
 .hero p.l{font-size:20px;max-width:34em;margin:28px 0 34px;color:#2B2922}
 .cta{display:flex;gap:18px;flex-wrap:wrap}
-.glyph{position:absolute;right:-60px;top:20px;width:360px;opacity:.07;pointer-events:none;transform:rotate(-8deg)}
+.glyph{position:absolute;right:-40px;bottom:-40px;width:340px;opacity:.06;pointer-events:none}
 .hero{position:relative;overflow:hidden}
 .hero .w{position:relative}
 
@@ -143,8 +140,12 @@ label.f{display:grid;gap:6px;font:500 12px var(--mono);letter-spacing:.06em;text
 form input,form select,form textarea{width:100%;font:16px var(--sans);padding:11px 12px;border:1.5px solid var(--ink);background:#FBF9F2;color:var(--ink);border-radius:0;text-transform:none;letter-spacing:0}
 form textarea{min-height:130px;resize:vertical}
 .hp{position:absolute;left:-9999px}
-#msg{font-size:14.5px;min-height:20px}
-#msg.ok{color:var(--teal-d)}#msg.err{color:var(--red)}
+#msg{font-size:14.5px;line-height:1.5}
+#msg:not(:empty){padding:12px 14px;border:1.5px solid var(--ink);background:#FBF9F2}
+#msg.ok{border-color:var(--teal-d);color:var(--teal-d)}#msg.err{border-color:var(--red);color:#7c2d12}
+#msg .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+#msg .acts a,#msg .acts button{font:500 12px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:8px 12px;border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer}
+#msg .acts button{background:transparent;color:var(--ink)}
 .contact form .fine{font-size:12.5px;color:var(--mute)}
 footer{background:var(--ink);color:#a8a493;padding:0 0 34px}
 footer .w{border-top:1px solid #3a382f;padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -165,17 +166,15 @@ footer a{color:var(--paper)}
   tr:hover td{background:none}
   .glyph{width:240px;right:-70px}
 }
-@media(max-width:560px){.two{grid-template-columns:1fr}.fld{grid-template-columns:1fr}.w{padding:0 20px}}
+@media(max-width:560px){.bar{padding:12px 0}.brand{font-size:22px;gap:9px}.brand img{height:36px;width:auto}nav .btn{padding:10px 14px;font-size:12px;box-shadow:3px 3px 0 var(--teal)}.hero{padding:44px 0 64px}.two{grid-template-columns:1fr}.fld{grid-template-columns:1fr}.w{padding:0 20px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
-<div class="strip mono"><div class="w"><span>Runs MyId — studio aplikasi, Indonesia</span><a href="mailto:runsmyid@gmail.com">runsmyid@gmail.com</a></div></div>
-
 <header>
   <div class="w bar">
-    <a class="brand" href="#atas"><img src="assets/logo/logo-master.svg" alt=""><span>Runs<i>MyId</i></span></a>
+    <a class="brand" href="#atas"><img src="assets/logo/logo-transparent.svg" alt=""><span>Runs<i>MyId</i></span></a>
     <nav>
       <a href="#prinsip">Prinsip</a><a href="#layanan">Layanan</a><a href="#alur">Alur</a><a href="#tanya">Tanya jawab</a>
       <a class="btn" href="#kontak">Ajak bicara</a>
@@ -185,7 +184,7 @@ footer a{color:var(--paper)}
 
 <main id="atas">
 <section class="hero">
-  <img class="glyph" src="assets/logo/logo-monochrome.svg" alt="">
+  <img class="glyph" src="assets/logo/logo-watermark.svg" alt="">
   <div class="w">
     <div>
       <p class="mono" style="color:var(--teal);margin-bottom:22px">Aplikasi / bisnis / angka</p>
@@ -377,20 +376,34 @@ function calc(){
 
 /* ---- formulir ---- */
 const f=$('f'),msg=$('msg'),btn=$('btn'),TO='runsmyid@gmail.com';
+function show(kind,text,d){
+  msg.className=kind;msg.textContent=text;
+  if(d){
+    const body=`Nama: ${d.nama}\nEmail: ${d.email}\nPerusahaan: ${d.perusahaan||'-'}\nKebutuhan: ${d.kebutuhan}\n\n${d.pesan}`;
+    const subj='Pesan dari website Runs MyId';
+    const acts=document.createElement('div');acts.className='acts';
+    const g=document.createElement('a');g.target='_blank';g.rel='noopener';
+    g.href='https://mail.google.com/mail/?view=cm&fs=1&to='+TO+'&su='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);g.textContent='Kirim lewat Gmail';
+    const m=document.createElement('a');m.href='mailto:'+TO+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);m.textContent='Buka aplikasi email';
+    const c=document.createElement('button');c.type='button';c.textContent='Salin pesan';
+    c.onclick=async()=>{try{await navigator.clipboard.writeText(`Kepada: ${TO}\n\n${body}`);c.textContent='Tersalin'}catch(_){c.textContent='Gagal menyalin'}};
+    acts.append(g,m,c);msg.append(acts);
+  }
+  msg.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
 f.addEventListener('submit',async e=>{
   e.preventDefault();
-  const d=Object.fromEntries(new FormData(f).entries());msg.className='';
+  const d=Object.fromEntries(new FormData(f).entries());
   if(d._honey)return;
-  if(!d.nama.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.pesan.trim()){msg.className='err';msg.textContent='Lengkapi nama, email yang valid, dan ceritanya.';return}
-  btn.disabled=true;btn.textContent='Mengirim…';
+  if(!d.nama.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.pesan.trim()){show('err','Lengkapi nama, email yang valid, dan ceritanya.');return}
+  btn.disabled=true;btn.textContent='Mengirim…';show('','Mengirim pesan…');
   try{
     const r=await fetch('https://formsubmit.co/ajax/'+TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
-    const o=await r.json();if(!r.ok||o.success==='false')throw 0;
-    msg.className='ok';msg.textContent='Terkirim. Kami balas lewat email.';f.reset();
-  }catch(_){
-    const body=`Nama: ${d.nama}\nEmail: ${d.email}\nPerusahaan: ${d.perusahaan||'-'}\nKebutuhan: ${d.kebutuhan}\n\n${d.pesan}`;
-    msg.className='err';msg.textContent='Pengiriman otomatis gagal, aplikasi email Anda dibuka sebagai gantinya.';
-    location.href=`mailto:${TO}?subject=${encodeURIComponent('Pesan dari website Runs MyId')}&body=${encodeURIComponent(body)}`;
+    const o=await r.json().catch(()=>({}));
+    if(!r.ok||String(o.success)!=='true')throw new Error(o.message||'gagal');
+    show('ok','Terkirim. Terima kasih, kami balas lewat email.');f.reset();
+  }catch(err){
+    show('err','Pesan belum bisa dikirim otomatis. Pakai salah satu cara ini supaya pesan Anda tetap sampai:',d);
   }finally{btn.disabled=false;btn.textContent='Kirim'}
 });
 </script>
