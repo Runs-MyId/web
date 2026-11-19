@@ -139,7 +139,6 @@ form{background:var(--paper);color:var(--ink);padding:30px;display:grid;gap:18px
 label.f{display:grid;gap:6px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
 form input,form select,form textarea{width:100%;font:16px var(--sans);padding:11px 12px;border:1.5px solid var(--ink);background:#FBF9F2;color:var(--ink);border-radius:0;text-transform:none;letter-spacing:0}
 form textarea{min-height:130px;resize:vertical}
-.hp{position:absolute;left:-9999px}
 #msg{font-size:14.5px;line-height:1.5}
 #msg:not(:empty){padding:12px 14px;border:1.5px solid var(--ink);background:#FBF9F2}
 #msg.ok{border-color:var(--teal-d);color:var(--teal-d)}#msg.err{border-color:var(--red);color:#7c2d12}
@@ -322,7 +321,6 @@ footer a{color:var(--paper)}
       <input type="hidden" name="_subject" value="Pesan baru dari website Runs MyId">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
-      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="two">
         <label class="f">Nama<input name="nama" required autocomplete="name"></label>
         <label class="f">Email<input name="email" type="email" required autocomplete="email"></label>
@@ -394,7 +392,6 @@ function show(kind,text,d){
 f.addEventListener('submit',async e=>{
   e.preventDefault();
   const d=Object.fromEntries(new FormData(f).entries());
-  if(d._honey)return;
   if(!d.nama.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.pesan.trim()){show('err','Lengkapi nama, email yang valid, dan ceritanya.');return}
   btn.disabled=true;btn.textContent='Mengirim…';show('','Mengirim pesan…');
   try{
