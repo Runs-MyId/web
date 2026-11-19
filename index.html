@@ -374,6 +374,7 @@ function calc(){
 
 /* ---- formulir ---- */
 const f=$('f'),msg=$('msg'),btn=$('btn'),TO='runsmyid@gmail.com';
+const W3F_KEY='5473ee94-04ae-4760-99e0-e4384129b3e3';   // tempel Access Key Web3Forms di sini (gratis, web3forms.com) agar pengiriman andal
 function show(kind,text,d){
   msg.className=kind;msg.textContent=text;
   if(d){
@@ -394,14 +395,22 @@ f.addEventListener('submit',async e=>{
   const d=Object.fromEntries(new FormData(f).entries());
   if(!d.nama.trim()||!/^\S+@\S+\.\S+$/.test(d.email)||!d.pesan.trim()){show('err','Lengkapi nama, email yang valid, dan ceritanya.');return}
   btn.disabled=true;btn.textContent='Mengirim…';show('','Mengirim pesan…');
+  const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),9000);   // jangan pernah menggantung
   try{
-    const r=await fetch('https://formsubmit.co/ajax/'+TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
-    const o=await r.json().catch(()=>({}));
+    let r,o;
+    if(W3F_KEY){   // Web3Forms (disarankan): isi W3F_KEY di atas
+      r=await fetch('https://api.web3forms.com/submit',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify({access_key:W3F_KEY,subject:'Pesan baru dari website Runs MyId',from_name:'Website Runs MyId',name:d.nama,email:d.email,perusahaan:d.perusahaan||'-',kebutuhan:d.kebutuhan,message:d.pesan})});
+    }else{         // cadangan: FormSubmit (butuh aktivasi email sekali)
+      r=await fetch('https://formsubmit.co/ajax/'+TO,{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
+    }
+    o=await r.json().catch(()=>({}));
     if(!r.ok||String(o.success)!=='true')throw new Error(o.message||'gagal');
     show('ok','Terkirim. Terima kasih, kami balas lewat email.');f.reset();
   }catch(err){
-    show('err','Pesan belum bisa dikirim otomatis. Pakai salah satu cara ini supaya pesan Anda tetap sampai:',d);
-  }finally{btn.disabled=false;btn.textContent='Kirim'}
+    const habis=err&&err.name==='AbortError';
+    show('err',(habis?'Server pengiriman tidak merespons. ':'Pesan belum bisa dikirim otomatis. ')+'Pakai salah satu cara ini supaya pesan Anda tetap sampai:',d);
+  }finally{clearTimeout(timer);btn.disabled=false;btn.textContent='Kirim'}
 });
 </script>
 </body>
